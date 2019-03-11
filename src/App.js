@@ -6,7 +6,7 @@ import Authentication from "./components/forms/Authentication";
 import Calendar from "./components/views/Calendar";
 import Plant from "./components/views/Plant";
 import PlantList from "./components/views/PlantList";
-
+import PlantForm from './components/PlantForm';
 import ProtectedRoute from './components/ProtectedRoute'
 
 class App extends Component {
@@ -14,7 +14,9 @@ class App extends Component {
     return <div className="App">
       <nav>
       </nav>
-      <section></section>
+      <section>
+        <Route path='/add-plant' render={props => <PlantForm {...props} />} />
+      </section>
     </div>;
   }
 }
