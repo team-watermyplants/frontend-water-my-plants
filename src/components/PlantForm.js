@@ -29,7 +29,6 @@ class PlantForm extends React.Component {
                     &q=${this.state.plantName}&image_type=photo&per_page=${this.state.amount}
                     &safesearch=true`)
                 .then(res => {
-                    console.log(res.data.hits)
                     this.setState({images: res.data.hits})})
                 
                 .catch(err => console.log(err));
@@ -39,10 +38,11 @@ class PlantForm extends React.Component {
 
     selectImage = (e, img) => {
         e.preventDefault();
-        this.setState({image: {img}})
+        this.setState({image: img})
     }
 
     render() {
+
         return (
             <div>
                 <h1>Add new plant</h1>
