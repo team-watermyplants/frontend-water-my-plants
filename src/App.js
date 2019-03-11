@@ -26,7 +26,9 @@ class App extends Component {
   }
 }
 
-export default connect(
-  null,
-  {}
-)(withRouter(App));
+export default withRouter(
+  connect(
+    null,
+    {}
+  )(App)
+);
