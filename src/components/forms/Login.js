@@ -28,7 +28,11 @@ class Login extends React.Component {
         username: this.state.credentials.username,
         password: this.state.credentials.password
       })
-      .then(() => this.props.history.push("/home"));
+      .then(() => {
+        console.log('going home', this.props.history)
+        this.props.history.push("/home")
+        // window.location.reload()
+    });
   };
 
   render() {

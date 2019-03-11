@@ -1,6 +1,6 @@
 import React from "react";
 import {Route} from 'react-router-dom';
-import ProtectedRoute from '../'
+import ProtectedRoute from '.././components/ProtectedRoute'
 
 const authenticate = LogInPage => HomePage => class extends React.Component {
     constructor(props) {
@@ -20,9 +20,9 @@ const authenticate = LogInPage => HomePage => class extends React.Component {
 
     render() {
         if(this.state.loggedIn) {
-            return <Route path='/' component={HomePage} />
+            return <ProtectedRoute path='/' component={HomePage} />
         }
-        return <ProtectedRoute path='/login' component={LogInPage} />
+        return <Route path='/login' component={LogInPage} />
     }
 }
 

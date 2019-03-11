@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { createUser } from '../../actions'
 
 const emailIsValid = email => {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -104,5 +105,5 @@ class SignUp extends React.Component {
 
 export default connect(
   null,
-  {}
+  { createUser }
 )(SignUp);

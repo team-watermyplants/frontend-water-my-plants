@@ -4,6 +4,8 @@ export const REQUEST_IN_PROGRESS = "REQUEST_IN_PROGRESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 
 export const login = creds => dispatch => {
+  console.log('logging in')
+
   dispatch({
     type: REQUEST_IN_PROGRESS
   });

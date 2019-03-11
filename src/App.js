@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, NavLink } from "react-router-dom";
+import { Route, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
 import AddPlant from "./components/forms/AddPlant";
@@ -12,17 +12,14 @@ import PlantList from "./components/views/PlantList";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
-import authenticate from "./authentication/authenticate";
-
-const Display = authenticate(Login)(Home);
-
 class App extends Component {
   render() {
     return (
       <div className="App">
         <nav />
         <section>
-          <Display />
+          <Route path="/login" render={props => <Login {...props} />} />
+          <ProtectedRoute path="/home" component={Home} />
         </section>
       </div>
     );
@@ -32,4 +29,4 @@ class App extends Component {
 export default connect(
   null,
   {}
-)(App);
+)(withRouter(App));
