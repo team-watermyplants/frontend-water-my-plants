@@ -1,6 +1,8 @@
 import React from 'react';
 import axios from 'axios';
 
+import ImageResults from './ImageResults';
+
 class PlantForm extends React.Component {
     constructor(props) {
         super(props);
@@ -10,21 +12,29 @@ class PlantForm extends React.Component {
             apiUrl: 'https://pixabay.com/api',
             apiKey: '11850512-34a79ee2d04c5d7e18f774944',
             amount: 5,
+            image: [],
             images: []
         }
     }
 
     changeHandler = e => {
-        this.setState({[e.target.name]: e.target.value}, () => {
-            axios.get(`${this.state.apiUrl}/?key=${this.state.apiKey}
-            &q=${this.state.plantName}&image_type=photo&per_page=${this.state.amount}
-            &safesearch=true`)
-            .then(res => this.setState({images: res.data.hits}))
-            .catch(err => console.log(err));
+        const val = e.target.value;
+        this.setState({[e.target.name]: val }, () => {
+            if(val === '') {
+                this.setState({images: []})
+            } else {
+            axios
+                .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
+                &q=${this.state.plantName}&image_type=photo&per_page=${this.state.amount}
+                &safesearch=true`)
+                .then(res => this.setState({images: res.data.hits}))
+                .catch(err => console.log(err));
+            }
         })
     }
 
     render() {
+        console.log(this.state)
         return (
             <div>
                 <form>
@@ -45,6 +55,7 @@ class PlantForm extends React.Component {
                     />
                     <br />
                     <button>Add Plant</button>
+                    {this.state.images.length > 0 ? (<ImageResults images={this.state.images} />): null}
                 </form>
             </div>
         )
