@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 class ImageResults extends Component {
     render() {
         let imageList;
-        const { images } = this.props;
+        const { images, selectImage } = this.props;
 
         if(images) {
             imageList = (
@@ -14,12 +14,12 @@ class ImageResults extends Component {
                             className='image-box'
                             title={img.tags}
                             key={img.id}
-                            subtitle={
-                                <span>by <strong>{img.user}</strong></span>
-                            }
-                            onClick={selectImage}
-                            >
-                            <img src={img.imageURL} alt={img.tags} />
+                            subtitle={<span>by <strong>{img.user}</strong></span>}
+                        >
+                            <img 
+                                src={img.webformatURL} 
+                                alt={img.tags} 
+                                onClick={e => selectImage(img.webformatURL)}/>
                         </div>
                         )}
                 </div>
@@ -27,7 +27,7 @@ class ImageResults extends Component {
         } else {
             imageList = null;
         }
-        
+
     return (
     <div>
         <h2>Select Image</h2>
