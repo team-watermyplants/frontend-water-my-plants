@@ -10,7 +10,7 @@ export const ADD_PLANT_FAILURE = 'ADD_PLANT_FAILURE';
 
 export const addPlant = newPlant => dispatch => {
 
-    dispatch({ type: ADD_PLANT_FAILURE });
+    dispatch({ type: ADD_PLANT_START });
 
     axios
         .post('https://api-plants.herokuapp.com/plants', newPlant)

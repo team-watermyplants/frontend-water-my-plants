@@ -11,6 +11,7 @@ class PlantForm extends React.Component {
         super(props);
         this.state = {
             plantName: '',
+            searchPlant:'',
             description: '',
             location: '',
             apiUrl: 'https://pixabay.com/api',
@@ -44,7 +45,7 @@ class PlantForm extends React.Component {
         this.setState({selectedImage: img})
     }
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
         const newPlant = {
             name: this.state.plantName,
@@ -56,9 +57,10 @@ class PlantForm extends React.Component {
 
         this.setState({
             name: '',
+            searchPlant: '',
             location: '',
             description: '',
-            plantURL: ''
+            selectedImage: '',
         })
     }
 
@@ -72,7 +74,7 @@ class PlantForm extends React.Component {
         return (
             <div>
                 <h1>Add new plant</h1>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <input 
                         type='text'
                         name='plantName'
@@ -97,12 +99,21 @@ class PlantForm extends React.Component {
                         placeholder='Describe your plant'
                     />
                     <br />
-                    <button>Add Plant</button>
+                    <input
+                        type='text'
+                        name='searchPlant'
+                        value={this.state.searchPlant}
+                        onChange={this.changeHandler}
+                        placeholder='Enter plant to search'
+                    />
                     {this.state.images.length > 0 ? (
                         <ImageResults
                             images={this.state.images}
                             selectImage={this.selectImage}
                             />): null}
+                    <br />
+                    <button>Add Plant</button>
+                    
                 </form>
             </div>
         )
