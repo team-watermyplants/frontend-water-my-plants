@@ -15,11 +15,13 @@ import AppBar from "material-ui/AppBar";
 class App extends Component {
   render() {
     return (
+
       <MuiThemeProvider>
+
         <div className="App">
           <AppBar title="Water My Plants">
-            <NavLink to="/">home</NavLink>
-            <NavLink to="/add-plant">add plant</NavLink>
+            <NavLink to="/">Home</NavLink>
+            <NavLink to="/add-plant">Add Plant</NavLink>
           </AppBar>
           <section>
             <Route path="/login" render={props => <Login {...props} />} />
