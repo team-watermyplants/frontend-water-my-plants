@@ -11,9 +11,12 @@ export const createUser = userInfo => dispatch => {
   return axios
     .post("https://api-plants.herokuapp.com/auth/register", userInfo)
     .then(res => {
+      console.log(res);
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("user id", res.data.user.id);
       dispatch({
-        type: SIGN_UP_SUCCESS
+        type: SIGN_UP_SUCCESS,
+        payload: res.data.user
       });
     })
     .catch(err => console.log(err));

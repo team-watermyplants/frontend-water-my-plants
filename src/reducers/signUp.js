@@ -1,10 +1,11 @@
 import { REQUEST_IN_PROGRESS, SIGN_UP_SUCCESS } from "../actions";
 
 const initialState = {
-  communicating: false
+  communicating: false,
+  userInfo: null
 };
 
-export const login = (state = initialState, action) => {
+export const signUp = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_IN_PROGRESS:
       return {
@@ -14,7 +15,8 @@ export const login = (state = initialState, action) => {
     case SIGN_UP_SUCCESS:
       return {
         ...state,
-        communicating: false
+        communicating: false,
+        userInfo: action.payload
       };
     default:
       return state;

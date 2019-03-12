@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { addPlant } from '../actions';
+import { addPlant } from '../../actions';
 
-import ImageResults from './ImageResults';
+import ImageResults from '../ImageResults';
 
 class PlantForm extends React.Component {
     constructor(props) {
@@ -51,11 +51,14 @@ class PlantForm extends React.Component {
 
     handleSubmit = e => {
         e.preventDefault();
+        const userId = localStorage.getItem('user id')
+        console.log('\nid', userId)
         const newPlant = {
             name: this.state.plantName,
             location: this.state.location,
             description: this.state.description,
-            plantURL: this.state.selectedImage
+            plantURL: this.state.selectedImage,
+            userId
         }
         this.props.addPlant(newPlant);
 
