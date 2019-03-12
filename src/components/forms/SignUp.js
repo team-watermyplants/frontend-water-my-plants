@@ -64,7 +64,7 @@ class SignUp extends React.Component {
       emailIsValid(this.state.NewUserInfo.email)
     ) {
       this.props.createUser(this.state.NewUserInfo)
-      .then(res => {
+      .then(() => {
         this.props.history.push('/home')
       })
     }

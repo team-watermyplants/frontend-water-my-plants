@@ -2,9 +2,9 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 
-import { addPlant } from '../actions';
+import { addPlant } from '../../actions';
 
-import ImageResults from './ImageResults';
+import ImageResults from '../ImageResults';
 
 class PlantForm extends React.Component {
     constructor(props) {
