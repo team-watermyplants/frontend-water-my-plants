@@ -1,6 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createUser } from "../../actions";
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
+import TextField from 'material-ui/TextField'
+import RaisedButton from 'material-ui/RaisedButton'
 
 const emailIsValid = email => {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -17,8 +20,9 @@ class SignUp extends React.Component {
       password: "",
       confirmPassword: "",
       phoneNumber: "",
-      email: ""
-    }
+      email: "",
+    },
+    step: 1
   };
 
   handleChanges = e => {
@@ -31,6 +35,20 @@ class SignUp extends React.Component {
     });
   };
 
+  nextStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step + 1
+    });
+  };
+
+  prevStep = () => {
+    const { step } = this.state;
+    this.setState({
+      step: step - 1
+    });
+  };
+  
   handleSubmit = e => {
     e.preventDefault();
     if (
