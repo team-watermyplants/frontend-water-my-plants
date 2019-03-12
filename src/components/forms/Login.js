@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from 'react-router-dom'
 import { connect } from "react-redux";
 import { login } from "../../actions";
 
@@ -18,7 +19,6 @@ class Login extends React.Component {
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -29,9 +29,7 @@ class Login extends React.Component {
         password: this.state.credentials.password
       })
       .then(() => {
-        console.log('going home', this.props.history)
         this.props.history.push("/home")
-        // window.location.reload()
     });
   };
 
@@ -54,6 +52,7 @@ class Login extends React.Component {
           onChange={this.handleChanges}
         />
         <button>log in</button>
+        <p>don't have an account? sign up <Link to='/sign-up'>here</Link></p>
       </form>
     );
   }
