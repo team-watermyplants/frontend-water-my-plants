@@ -4,8 +4,7 @@ import { connect } from 'react-redux'
 
 import ProtectedRoute from './components/ProtectedRoute'
 
-import PlantForm from './components/PlantForm'
-import AddPlant from './components/forms/AddPlant'
+import PlantForm from './components/forms/PlantForm'
 import Login from './components/forms/Login'
 import SignUp from './components/forms/SignUp'
 import Home from './components/views/Home'
@@ -20,7 +19,7 @@ class App extends Component {
       <MuiThemeProvider>
         <div className='App'>
           <AppBar title='Water My Plants'>
-            <NavLink to='/home'>home</NavLink>
+            <NavLink to='/'>home</NavLink>
           </AppBar>
           <section>
             <Route
@@ -29,7 +28,7 @@ class App extends Component {
             />
             <Route path='/login' render={props => <Login {...props} />} />
             <Route path='/sign-up' render={props => <SignUp {...props} />} />
-            <ProtectedRoute path='/home' component={Home} />
+            <ProtectedRoute path='/' component={Home} />
           </section>
         </div>
       </MuiThemeProvider>

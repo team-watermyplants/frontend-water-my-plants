@@ -1,11 +1,49 @@
-import React from 'react'
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getData } from "../../actions";
 
-const Home = () => {
-    return(
-        <div>
-            <h1>home</h1>
-        </div>
-    )
+class Home extends React.Component {
+  componentDidMount = () => {
+    const userId = localStorage.getItem("user id");
+    this.props.getData(userId);
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>{this.props.state}</h1>
+        {this.props.plants ? (
+          <div>
+            <ul>
+              {this.props.plants.map(plant => {
+                return (
+                  <li>
+                    <div>
+                      <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
+                    </div>
+                  </li>
+                );
+              })}
+            </ul>
+          </div>
+        ) : (
+          <p>loading...</p>
+        )}
+      </div>
+    );
+  }
 }
 
-export default Home
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    plants: state.listReducer.plants,
+    userInfo: state.login.userInfo
+  };
+};
+
+export default connect(
+  mapStateToProps,
+  { getData }
+)(Home);

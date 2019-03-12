@@ -1,10 +1,12 @@
-import { login } from './login'
-import { combineReducers } from 'redux';
-import { plantReducer } from './plantReducer';
+import { login } from "./login";
+import { signUp } from "./signUp";
+import { listReducer } from "./listReducer";
+import { combineReducers } from "redux";
+import { plantReducer } from "./plantReducer";
 
-export default combineReducers ({
+export default combineReducers({
+  listReducer,
   plantReducer,
-  login
+  login,
+  signUp
 });
-
-
