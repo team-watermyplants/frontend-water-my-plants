@@ -1,5 +1,8 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import axios from 'axios';
+
+import { addPlant } from '../actions';
 
 import ImageResults from './ImageResults';
 
@@ -13,7 +16,7 @@ class PlantForm extends React.Component {
             apiUrl: 'https://pixabay.com/api',
             apiKey: '11850512-34a79ee2d04c5d7e18f774944',
             amount: 5,
-            image: '',
+            selectedImage: '',
             images: []
         }
     }
@@ -38,15 +41,38 @@ class PlantForm extends React.Component {
 
     selectImage = (e, img) => {
         e.preventDefault();
-        this.setState({image: img})
+        this.setState({selectedImage: img})
+    }
+
+    onSubmit = e => {
+        e.preventDefault();
+        const newPlant = {
+            name: this.state.plantName,
+            location: this.state.location,
+            description: this.state.description,
+            plantURL: this.state.selectedImage
+        }
+        this.props.addPlant(newPlant);
+
+        this.setState({
+            name: '',
+            location: '',
+            description: '',
+            plantURL: ''
+        })
     }
 
     render() {
 
+        if (this.props.addingPlant) {
+            return (
+                <div>Planting...</div>
+            )
+        }
         return (
             <div>
                 <h1>Add new plant</h1>
-                <form>
+                <form onSubmit={this.onSubmit}>
                     <input 
                         type='text'
                         name='plantName'
@@ -73,14 +99,18 @@ class PlantForm extends React.Component {
                     <br />
                     <button>Add Plant</button>
                     {this.state.images.length > 0 ? (
-                        <ImageResults 
+                        <ImageResults
                             images={this.state.images}
                             selectImage={this.selectImage}
                             />): null}
                 </form>
             </div>
         )
-    } 
+    }
 }
 
-export default PlantForm
+const mapStateToProps = state => ({
+    addingPlant: state.addingPlant
+});
+
+export default connect(mapStateToProps, { addPlant })(PlantForm);
