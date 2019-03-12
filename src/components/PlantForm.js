@@ -60,7 +60,7 @@ class PlantForm extends React.Component {
         this.props.addPlant(newPlant);
 
         this.setState({
-            name: '',
+            plantName: '',
             searchPlant: '',
             location: '',
             description: '',
