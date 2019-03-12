@@ -1,15 +1,14 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 
-class ImageResults extends Component {
-    render() {
-        let imageList;
-        const { images, selectImage } = this.props;
+const ImageResults = props => {
 
-        if(images) {
+        let imageList;
+
+        if(props.images) {
             imageList = (
                 <div className='imageList-container'>
-                    {images.map(img => 
+                    {props.images.map(img => 
                         <div 
                             className='image-box'
                             title={img.tags}
@@ -17,9 +16,10 @@ class ImageResults extends Component {
                             subtitle={<span>by <strong>{img.user}</strong></span>}
                         >
                             <img 
+                                style={{cursor: 'pointer'}}
                                 src={img.webformatURL} 
                                 alt={img.tags} 
-                                onClick={e => selectImage(img.webformatURL)}/>
+                                onClick={e => props.selectImage(e, img.webformatURL)}/>
                         </div>
                         )}
                 </div>
@@ -29,12 +29,12 @@ class ImageResults extends Component {
         }
 
     return (
+        
     <div>
         <h2>Select Image</h2>
         {imageList}
     </div>
     )
-}
 }
 
 ImageResults.propTypes = {
