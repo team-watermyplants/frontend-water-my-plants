@@ -19,7 +19,7 @@ class App extends Component {
       <div className="App">
         <nav>
           <NavLink to="/home">home</NavLink>
-          <NavLink to="">Plant Form</NavLink>
+          <NavLink to="/add-plant">Plant Form</NavLink>
         </nav>
         <section>
           <Route path="/add-plant" render={props => <PlantForm {...props} />} />

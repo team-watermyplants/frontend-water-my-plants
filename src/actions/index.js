@@ -8,6 +8,8 @@ export const ADD_PLANT_START = 'ADD_PLANT_START';
 export const ADD_PLANT_SUCCESS = 'ADD_PLANT_SUCCESS';
 export const ADD_PLANT_FAILURE = 'ADD_PLANT_FAILURE';
 
+const site = 'https://api-plants.herokuapp.com/plants';
+
 export const addPlant = newPlant => dispatch => {
 
     dispatch({ type: ADD_PLANT_START });
@@ -15,9 +17,10 @@ export const addPlant = newPlant => dispatch => {
     axios
         .post('https://api-plants.herokuapp.com/plants', newPlant)
         .then(res => {
+            console.log(res.data)
             dispatch({
                 type: ADD_PLANT_SUCCESS,
-                payload: console.log(res.data)
+                payload: res.data
             })
         })
         .catch(err => {

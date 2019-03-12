@@ -23,26 +23,30 @@ class PlantForm extends React.Component {
     }
 
     changeHandler = e => {
-        const val = e.target.value;
+        this.setState({[e.target.name]: e.target.value })
+    }
+
+    searchChangeHandler = e => {
+        let val = e.target.value;
         this.setState({[e.target.name]: val }, () => {
-            if(val === '') {
-                this.setState({images: []})
+            if (val === '') {
+                this.setState({images: []});
             } else {
-            axios
-                .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
-                    &q=${this.state.plantName}&image_type=photo&per_page=${this.state.amount}
-                    &safesearch=true`)
-                .then(res => {
-                    this.setState({images: res.data.hits})})
-                
-                .catch(err => console.log(err));
+                axios
+                    .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
+                        &q=${this.state.searchPlant}&image_type=photo&per_page=${this.state.amount}
+                        &safesearch=true`)
+                    .then(res => {
+                        this.setState({images: res.data.hits})})
+                    .catch(err => console.log(err));
             }
-        })
+        });
     }
 
     selectImage = (e, img) => {
         e.preventDefault();
         this.setState({selectedImage: img})
+        this.setState({images: [], searchPlant: 'Plant image selected!'})
     }
 
     handleSubmit = e => {
@@ -103,7 +107,7 @@ class PlantForm extends React.Component {
                         type='text'
                         name='searchPlant'
                         value={this.state.searchPlant}
-                        onChange={this.changeHandler}
+                        onChange={this.searchChangeHandler}
                         placeholder='Enter plant to search'
                     />
                     {this.state.images.length > 0 ? (
