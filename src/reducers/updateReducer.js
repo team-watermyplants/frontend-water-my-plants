@@ -4,13 +4,13 @@ import {
     UPDATE_PLANT_FAILURE
 } from '../actions/updateActions';
 
-initialState = {
+const initialState = {
     updatingPlant: false,
     error: null,
     plants: []
 }
 
-export const updatePlantReducer = (state = initialState, action) => {
+export const updateReducer = (state = initialState, action) => {
     switch(action.type) {
         case UPDATE_IN_PROGRESS:
             return {

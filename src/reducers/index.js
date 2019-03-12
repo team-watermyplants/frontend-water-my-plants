@@ -4,7 +4,7 @@ import { listReducer } from "./listReducer";
 import { combineReducers } from "redux";
 import { plantReducer } from "./plantReducer";
 import { deletePlantReducer } from "./deletePlantReducer";
-import { updateReducer } from "./updateReducer";
+import  { updateReducer } from "./updateReducer";
 
 export default combineReducers({
   listReducer,
