@@ -19,7 +19,6 @@ class Login extends React.Component {
         [e.target.name]: e.target.value
       }
     });
-    console.log(this.state);
   };
 
   handleSubmit = e => {
@@ -30,9 +29,7 @@ class Login extends React.Component {
         password: this.state.credentials.password
       })
       .then(() => {
-        console.log('going home', this.props.history)
         this.props.history.push("/home")
-        // window.location.reload()
     });
   };
 
