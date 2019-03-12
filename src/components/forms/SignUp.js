@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { createUser } from '../../actions'
+import { createUser } from "../../actions";
 
 const emailIsValid = email => {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -11,24 +11,22 @@ const emailIsValid = email => {
 class SignUp extends React.Component {
   state = {
     NewUserInfo: {
+      firstName: "",
+      lastName: "",
       username: "",
       password: "",
       confirmPassword: "",
-      phone: "",
+      phoneNumber: "",
       email: ""
     }
   };
 
   handleChanges = e => {
     e.preventDefault();
-    let value = e.target.value;
-    if (e.target.name === "phone") {
-      value = parseInt(value, 10);
-    }
     this.setState({
       NewUserInfo: {
         ...this.state.NewUserInfo,
-        [e.target.name]: value
+        [e.target.name]: e.target.value
       }
     });
   };
@@ -36,32 +34,53 @@ class SignUp extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     if (
+      this.state.NewUserInfo.firstName !== "" &&
+      this.state.NewUserInfo.lastName !== "" &&
       this.state.NewUserInfo.username !== "" &&
       this.state.NewUserInfo.password !== "" &&
       this.state.NewUserInfo.confirmPassword !== "" &&
-      this.state.NewUserInfo.phone !== "" &&
+      this.state.NewUserInfo.phoneNumber !== "" &&
       this.state.NewUserInfo.email !== "" &&
       this.state.NewUserInfo.password ==
         this.state.NewUserInfo.confirmPassword &&
       emailIsValid(this.state.NewUserInfo.email)
     ) {
-      this.props.createUser(this.state.NewUserInfo);
+      this.props.createUser(this.state.NewUserInfo)
+      .then(res => {
+        this.props.history.push('/home')
+      })
     }
     this.setState({
       NewUserInfo: {
+        firstName: "",
+        lastName: "",
         username: "",
         password: "",
         confirmPassword: "",
-        phone: "",
+        phoneNumber: "",
         email: ""
       }
-    });
+      });
   };
 
   render() {
     return (
       <form onSubmit={this.handleSubmit}>
         <h1>sign up</h1>
+        <input
+          onChange={this.handleChanges}
+          type="text"
+          name="firstName"
+          placeholder="first name"
+          value={this.state.NewUserInfo.firstName}
+        />
+        <input
+          onChange={this.handleChanges}
+          type="text"
+          name="lastName"
+          placeholder="last name"
+          value={this.state.NewUserInfo.lastName}
+        />
         <input
           onChange={this.handleChanges}
           type="text"
@@ -85,10 +104,10 @@ class SignUp extends React.Component {
         />
         <input
           onChange={this.handleChanges}
-          type="phone"
-          name="phone"
+          type="text"
+          name="phoneNumber"
           placeholder="phone number"
-          value={this.state.NewUserInfo.phone}
+          value={this.state.NewUserInfo.phoneNumber}
         />
         <input
           onChange={this.handleChanges}
