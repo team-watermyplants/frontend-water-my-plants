@@ -1,9 +1,9 @@
-import React from "react";
-import { connect } from "react-redux";
-import { createUser } from "../../actions";
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import TextField from 'material-ui/TextField'
-import RaisedButton from 'material-ui/RaisedButton'
+import React from 'react';
+import { connect } from 'react-redux';
+import { createUser } from '../../actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 const emailIsValid = email => {
   return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(
@@ -14,15 +14,15 @@ const emailIsValid = email => {
 class SignUp extends React.Component {
   state = {
     NewUserInfo: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      password: "",
-      confirmPassword: "",
-      phoneNumber: "",
-      email: "",
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      confirmPassword: '',
+      phoneNumber: '',
+      email: '',
     },
-    step: 1
+    step: 1,
   };
 
   handleChanges = e => {
@@ -30,55 +30,54 @@ class SignUp extends React.Component {
     this.setState({
       NewUserInfo: {
         ...this.state.NewUserInfo,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
   nextStep = () => {
     const { step } = this.state;
     this.setState({
-      step: step + 1
+      step: step + 1,
     });
   };
 
   prevStep = () => {
     const { step } = this.state;
     this.setState({
-      step: step - 1
+      step: step - 1,
     });
   };
-  
+
   handleSubmit = e => {
     e.preventDefault();
     if (
-      this.state.NewUserInfo.firstName !== "" &&
-      this.state.NewUserInfo.lastName !== "" &&
-      this.state.NewUserInfo.username !== "" &&
-      this.state.NewUserInfo.password !== "" &&
-      this.state.NewUserInfo.confirmPassword !== "" &&
-      this.state.NewUserInfo.phoneNumber !== "" &&
-      this.state.NewUserInfo.email !== "" &&
+      this.state.NewUserInfo.firstName !== '' &&
+      this.state.NewUserInfo.lastName !== '' &&
+      this.state.NewUserInfo.username !== '' &&
+      this.state.NewUserInfo.password !== '' &&
+      this.state.NewUserInfo.confirmPassword !== '' &&
+      this.state.NewUserInfo.phoneNumber !== '' &&
+      this.state.NewUserInfo.email !== '' &&
       this.state.NewUserInfo.password ==
         this.state.NewUserInfo.confirmPassword &&
       emailIsValid(this.state.NewUserInfo.email)
     ) {
-      this.props.createUser(this.state.NewUserInfo)
-      .then(() => {
-        this.props.history.push('/home')
-      })
+      this.props.createUser(this.state.NewUserInfo).then(() => {
+        this.props.history.push('/home');
+      });
     }
     this.setState({
       NewUserInfo: {
-        firstName: "",
-        lastName: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        phoneNumber: "",
-        email: ""
-      }
-      });
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: '',
+        email: '',
+      },
+    });
   };
 
   render() {
@@ -91,6 +90,7 @@ class SignUp extends React.Component {
           name="firstName"
           placeholder="first name"
           value={this.state.NewUserInfo.firstName}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -98,6 +98,7 @@ class SignUp extends React.Component {
           name="lastName"
           placeholder="last name"
           value={this.state.NewUserInfo.lastName}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -105,6 +106,7 @@ class SignUp extends React.Component {
           name="username"
           placeholder="username"
           value={this.state.NewUserInfo.username}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -112,6 +114,7 @@ class SignUp extends React.Component {
           name="password"
           placeholder="password"
           value={this.state.NewUserInfo.password}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -119,6 +122,7 @@ class SignUp extends React.Component {
           name="confirmPassword"
           placeholder="confirm password"
           value={this.state.NewUserInfo.confirmPassword}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -126,6 +130,7 @@ class SignUp extends React.Component {
           name="phoneNumber"
           placeholder="phone number"
           value={this.state.NewUserInfo.phoneNumber}
+          required
         />
         <input
           onChange={this.handleChanges}
@@ -133,8 +138,9 @@ class SignUp extends React.Component {
           name="email"
           placeholder="email"
           value={this.state.NewUserInfo.email}
+          required
         />
-        <button>sign up</button>
+        <button>Sign Up</button>
       </form>
     );
   }

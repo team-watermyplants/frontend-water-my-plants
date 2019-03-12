@@ -11,6 +11,7 @@ class PlantForm extends React.Component {
         super(props);
         this.state = {
             plantName: '',
+            searchPlant:'',
             description: '',
             location: '',
             apiUrl: 'https://pixabay.com/api',
@@ -22,43 +23,51 @@ class PlantForm extends React.Component {
     }
 
     changeHandler = e => {
-        const val = e.target.value;
+        this.setState({[e.target.name]: e.target.value })
+    }
+
+    searchChangeHandler = e => {
+        let val = e.target.value;
         this.setState({[e.target.name]: val }, () => {
-            if(val === '') {
-                this.setState({images: []})
+            if (val === '') {
+                this.setState({images: []});
             } else {
-            axios
-                .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
-                    &q=${this.state.plantName}&image_type=photo&per_page=${this.state.amount}
-                    &safesearch=true`)
-                .then(res => {
-                    this.setState({images: res.data.hits})})
-                
-                .catch(err => console.log(err));
+                axios
+                    .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
+                        &q=${this.state.searchPlant}&image_type=photo&per_page=${this.state.amount}
+                        &safesearch=true`)
+                    .then(res => {
+                        this.setState({images: res.data.hits})})
+                    .catch(err => console.log(err));
             }
-        })
+        });
     }
 
     selectImage = (e, img) => {
         e.preventDefault();
         this.setState({selectedImage: img})
+        this.setState({images: [], searchPlant: 'Plant image selected!'})
     }
 
-    onSubmit = e => {
+    handleSubmit = e => {
         e.preventDefault();
+        const userId = localStorage.getItem('user id')
+        console.log('\nid', userId)
         const newPlant = {
             name: this.state.plantName,
             location: this.state.location,
             description: this.state.description,
-            plantURL: this.state.selectedImage
+            plantURL: this.state.selectedImage,
+            userId
         }
         this.props.addPlant(newPlant);
 
         this.setState({
-            name: '',
+            plantName: '',
+            searchPlant: '',
             location: '',
             description: '',
-            plantURL: ''
+            selectedImage: '',
         })
     }
 
@@ -72,7 +81,7 @@ class PlantForm extends React.Component {
         return (
             <div>
                 <h1>Add new plant</h1>
-                <form onSubmit={this.onSubmit}>
+                <form onSubmit={this.handleSubmit}>
                     <input 
                         type='text'
                         name='plantName'
@@ -97,12 +106,21 @@ class PlantForm extends React.Component {
                         placeholder='Describe your plant'
                     />
                     <br />
-                    <button>Add Plant</button>
+                    <input
+                        type='text'
+                        name='searchPlant'
+                        value={this.state.searchPlant}
+                        onChange={this.searchChangeHandler}
+                        placeholder='Enter plant to search'
+                    />
                     {this.state.images.length > 0 ? (
                         <ImageResults
                             images={this.state.images}
                             selectImage={this.selectImage}
                             />): null}
+                    <br />
+                    <button>Add Plant</button>
+                    
                 </form>
             </div>
         )
