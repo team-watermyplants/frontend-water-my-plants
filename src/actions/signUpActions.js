@@ -13,7 +13,7 @@ export const createUser = userInfo => dispatch => {
     .then(res => {
       console.log(res);
       localStorage.setItem("token", res.data.token);
-      localStorage.setItem("user id", res.data.user.id);
+      localStorage.setItem("userId", res.data.user.id);
       dispatch({
         type: SIGN_UP_SUCCESS,
         payload: res.data.user
