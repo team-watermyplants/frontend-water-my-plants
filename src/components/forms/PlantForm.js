@@ -1,8 +1,9 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-import DayPickerInput from 'react-day-picker/DayPickerInput';
-import 'react-day-picker/lib/style.css';
+// import DayPickerInput from 'react-day-picker/DayPickerInput';
+import DatePicker from 'react-datepicker';
+// import 'react-day-picker/lib/style.css';
 
 import { formatDate, parseDate } from 'react-day-picker/moment';
 
@@ -27,7 +28,8 @@ class PlantForm extends React.Component {
       apiUrl: 'https://api.unsplash.com/search/photos',
       apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 1,
-      images: []
+      images: [],
+      startDate: new Date()
     };
   }
 
@@ -91,10 +93,22 @@ class PlantForm extends React.Component {
     });
   };
 
+  changeHandler = e => {
+      this.setState({
+          ...this.state.plant,
+          [e.target.name]: e.target.value
+      })
+  }
+
+  handleDateChange = date => {
+      console.log(date)
+      this.setState({
+          startDate: date
+      })
+  }
+
   render() {
-    if (this.props.addingPlant) {
-      return <div>Planting...</div>;
-    }
+    
     return (
       <div>
         <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>
@@ -128,11 +142,13 @@ class PlantForm extends React.Component {
               <option>Every Other Day</option>
           </select>
           <br />
-          <DayPickerInput
+          <DatePicker
             formatDate={formatDate}
             parseDate={parseDate}
             placeholder={`Start Date: ${formatDate(new Date())}`}
-      />
+            selected={this.state.startDate}
+            onChange={() => this.handleDateChange}
+     />
           <br />
           <input
             type="text"
