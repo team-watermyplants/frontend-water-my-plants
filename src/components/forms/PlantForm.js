@@ -14,9 +14,9 @@ class PlantForm extends React.Component {
             searchPlant:'',
             description: '',
             location: '',
-            apiUrl: 'https://pixabay.com/api',
-            apiKey: '11850512-34a79ee2d04c5d7e18f774944',
-            amount: 5,
+            apiUrl: 'https://api.unsplash.com/search/photos',
+            apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
+            amount: 1,
             selectedImage: '',
             images: []
         }
@@ -33,11 +33,9 @@ class PlantForm extends React.Component {
                 this.setState({images: []});
             } else {
                 axios
-                    .get(`${this.state.apiUrl}/?key=${this.state.apiKey}
-                        &q=${this.state.searchPlant}&image_type=photo&per_page=${this.state.amount}
-                        &safesearch=true`)
+                    .get(`${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${this.state.searchPlant}&page=${this.state.amount}`)
                     .then(res => {
-                        this.setState({images: res.data.hits})})
+                        this.setState({images: res.data.results})})
                     .catch(err => console.log(err));
             }
         });
@@ -78,6 +76,7 @@ class PlantForm extends React.Component {
                 <div>Planting...</div>
             )
         }
+        console.log('images', this.state.images)
         return (
             <div>
                 <h1>Add new plant</h1>

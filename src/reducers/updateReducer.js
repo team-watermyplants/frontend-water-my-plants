@@ -6,6 +6,7 @@ import {
 
 const initialState = {
     updatingPlant: false,
+    activePlant: null,
     error: null,
     plants: []
 }

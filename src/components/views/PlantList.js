@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getData } from "../../actions";
+import { getData, deletePlant } from "../../actions";
 
 class Home extends React.Component {
   componentDidMount = () => {
@@ -40,5 +40,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getData }
+  { getData, deletePlant }
 )(Home);
