@@ -2,12 +2,12 @@ import {
   ADD_PLANT_START,
   ADD_PLANT_SUCCESS,
   ADD_PLANT_FAILURE
-} from '../actions';
+} from "../actions";
 
 const initialState = {
   addingPlant: false,
   plantList: [],
-  error: ''
+  error: ""
 };
 
 export const plantReducer = (state = initialState, action) => {
@@ -16,21 +16,21 @@ export const plantReducer = (state = initialState, action) => {
       return {
         ...state,
         fetchList: true,
-        error: ''
-      }
+        error: ""
+      };
     case ADD_PLANT_SUCCESS:
       return {
         ...state,
         fetchList: false,
-        error: '',
-        plantList: action.payload
-      }
-      case ADD_PLANT_FAILURE:
+        error: "",
+        plantList: [...state.plantList, action.payload]
+      };
+    case ADD_PLANT_FAILURE:
       return {
         ...state,
         fetchList: false,
         error: action.payload
-      }
+      };
     default:
       return state;
   }

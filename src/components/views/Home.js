@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getData, handleUpdate } from "../../actions";
+import { getData, handleUpdate, deletePlant } from "../../actions";
 
 class Home extends React.Component {
   componentDidMount = () => {
@@ -18,6 +18,9 @@ class Home extends React.Component {
   handleDelete = (e, id) => {
     e.preventDefault();
     console.log("id", id);
+    this.props.deletePlant(id).then(() => {
+      this.props.history.push("/");
+    });
   };
 
   render() {
@@ -56,5 +59,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getData, handleUpdate }
+  { getData, handleUpdate, deletePlant }
 )(Home);

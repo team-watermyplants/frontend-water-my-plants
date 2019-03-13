@@ -12,11 +12,11 @@ class PlantForm extends React.Component {
     this.state = {
       plant: {
         name: "",
-        searchPlant: "",
         description: "",
         location: "",
-        selectedImage: ""
+        plantURL: ""
       },
+      searchPlant: "",
       apiUrl: "https://pixabay.com/api",
       apiKey: "11850512-34a79ee2d04c5d7e18f774944",
       amount: 5,
@@ -67,7 +67,7 @@ class PlantForm extends React.Component {
 
   selectImage = (e, img) => {
     e.preventDefault();
-    this.setState({ selectedImage: img });
+    this.setState({ plantURL: img });
     this.setState({ images: [], searchPlant: "Plant image selected!" });
   };
 
@@ -76,21 +76,18 @@ class PlantForm extends React.Component {
     const userId = localStorage.getItem("userId");
     console.log("\nid", userId);
     const newPlant = {
-      name: this.state.plantName,
-      location: this.state.location,
-      description: this.state.description,
-      plantURL: this.state.selectedImage,
+      ...this.state.plant,
       userId
-    };
+    }
+    console.log(newPlant)
     this.props.addPlant(newPlant);
-
     this.setState({
       plant: {
-        plantName: "",
+        name: "",
         searchPlant: "",
         location: "",
         description: "",
-        selectedImage: ""
+        plantURL: ""
       }
     });
   };
