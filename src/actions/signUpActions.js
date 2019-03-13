@@ -9,7 +9,7 @@ export const createUser = userInfo => dispatch => {
     type: REQUEST_IN_PROGRESS
   });
   return axios
-    .post("https://api-plants.herokuapp.com/auth/register", userInfo)
+    .post("https://api-watermyplants.herokuapp.com/auth/register", userInfo)
     .then(res => {
       console.log(res);
       localStorage.setItem("token", res.data.token);

@@ -1,12 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { getData, handleUpdate, deletePlant } from "../../actions";
+import { getPlantList, handleUpdate, deletePlant } from "../../actions";
 
 class Home extends React.Component {
   componentDidMount = () => {
     const userId = localStorage.getItem("userId");
-    this.props.getData(userId);
+    this.props.getPlantList(userId);
   };
 
   handleUpdate = (e, plant) => {
@@ -20,7 +20,7 @@ class Home extends React.Component {
     console.log("id", id);
     this.props.deletePlant(id).then(() => {
       const userId = localStorage.getItem("userId");
-      this.props.getData(userId);
+      this.props.getPlantList(userId);
       this.props.history.push("/");
     });
   };
@@ -61,5 +61,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getData, handleUpdate, deletePlant }
+  { getPlantList, handleUpdate, deletePlant }
 )(Home);
