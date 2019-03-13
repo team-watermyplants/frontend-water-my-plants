@@ -3,6 +3,7 @@ import axios from "axios";
 export { REQUEST_IN_PROGRESS, LOGIN_SUCCESS, login } from "./loginActions";
 export { SIGN_UP_SUCCESS, createUser } from "./signUpActions";
 export { PLANT_REQUEST_SUCCESS, getData } from "./listActions";
+export { handleUpdate } from './updateActions'
 
 export const ADD_PLANT_START = "ADD_PLANT_START";
 export const ADD_PLANT_SUCCESS = "ADD_PLANT_SUCCESS";

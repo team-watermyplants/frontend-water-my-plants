@@ -1,18 +1,60 @@
 import React from "react";
-import PlantList from "./PlantList";
-import { connect } from 'react-redux'
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getData, handleUpdate } from "../../actions";
 
 class Home extends React.Component {
+  componentDidMount = () => {
+    const userId = localStorage.getItem("userId");
+    this.props.getData(userId);
+  };
+
+  handleUpdate = (e, plant) => {
+    e.preventDefault();
+    this.props.handleUpdate(plant);
+    this.props.history.push("/add-plant");
+  };
+
+  handleDelete = (e, id) => {
+    e.preventDefault();
+    console.log("id", id);
+  };
+
   render() {
-    return (
+    return this.props.plants ? (
       <div>
-        <PlantList />
+        <ul>
+          {this.props.plants.map(plant => {
+            return (
+              <li key={plant.id}>
+                <div>
+                  <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
+                  <button onClick={e => this.handleUpdate(e, plant)}>
+                    update
+                  </button>
+                  <button onClick={e => this.handleDelete(e, plant.id)}>
+                    delete
+                  </button>
+                </div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
+    ) : (
+      <p>loading...</p>
     );
   }
 }
 
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    plants: state.listReducer.plants
+  };
+};
+
 export default connect(
-  null,
-  {}
+  mapStateToProps,
+  { getData, handleUpdate }
 )(Home);
