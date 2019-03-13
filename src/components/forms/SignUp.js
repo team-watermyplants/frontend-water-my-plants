@@ -53,6 +53,7 @@ class SignUp extends React.Component {
       this.state.NewUserInfo.phoneNumber !== "" &&
       this.state.NewUserInfo.password == this.state.NewUserInfo.confirmPassword
     ) {
+      console.log(this.state.NewUserInfo)
       this.props.createUser(this.state.NewUserInfo).then(() => {
         this.props.history.push("/home");
       });
