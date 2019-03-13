@@ -19,6 +19,8 @@ class Home extends React.Component {
     e.preventDefault();
     console.log("id", id);
     this.props.deletePlant(id).then(() => {
+      const userId = localStorage.getItem("userId");
+      this.props.getData(userId);
       this.props.history.push("/");
     });
   };

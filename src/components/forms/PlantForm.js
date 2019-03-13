@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { addPlant } from "../../actions";
+import { addPlant, updatePlant } from "../../actions";
 
 import ImageResults from "../ImageResults";
 
@@ -78,9 +78,15 @@ class PlantForm extends React.Component {
     const newPlant = {
       ...this.state.plant,
       userId
-    }
-    console.log(newPlant)
-    this.props.addPlant(newPlant);
+    };
+    console.log(newPlant);
+    this.props.activePlant
+      ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
+          this.props.history.push("/");
+        })
+      : this.props.addPlant(newPlant).then(() => {
+          this.props.history.push("/");
+        });
     this.setState({
       plant: {
         name: "",
@@ -98,7 +104,7 @@ class PlantForm extends React.Component {
     }
     return (
       <div>
-        <h1>Add new plant</h1>
+        <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -152,5 +158,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPlant }
+  { addPlant, updatePlant }
 )(PlantForm);
