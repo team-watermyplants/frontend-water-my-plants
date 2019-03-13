@@ -7,6 +7,7 @@ import { addPlant, updatePlant } from "../../actions";
 import ImageResults from "../ImageResults";
 
 class PlantForm extends React.Component {
+
   constructor(props) {
     super(props);
     this.state = {
@@ -17,12 +18,13 @@ class PlantForm extends React.Component {
         plantURL: ""
       },
       searchPlant: "",
-      apiUrl: "https://pixabay.com/api",
-      apiKey: "11850512-34a79ee2d04c5d7e18f774944",
-      amount: 5,
+      apiUrl: 'https://api.unsplash.com/search/photos',
+      apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
+      amount: 1,
       images: []
     };
   }
+
 
   componentDidMount = () => {
     if (this.props.activePlant) {
@@ -34,36 +36,21 @@ class PlantForm extends React.Component {
     console.log(this.props.activePlant);
   };
 
-  changeHandler = e => {
-    this.setState({
-      plant: {
-        ...this.state.plant,
-        [e.target.name]: e.target.value
-      }
-    });
-  };
 
-  searchChangeHandler = e => {
-    let val = e.target.value;
-    this.setState({ [e.target.name]: val }, () => {
-      if (val === "") {
-        this.setState({ images: [] });
-      } else {
-        axios
-          .get(
-            `${this.state.apiUrl}/?key=${this.state.apiKey}
-                        &q=${
-                          this.state.searchPlant
-                        }&image_type=photo&per_page=${this.state.amount}
-                        &safesearch=true`
-          )
-          .then(res => {
-            this.setState({ images: res.data.hits });
-          })
-          .catch(err => console.log(err));
-      }
-    });
-  };
+    searchChangeHandler = e => {
+        let val = e.target.value;
+        this.setState({[e.target.name]: val }, () => {
+            if (val === '') {
+                this.setState({images: []});
+            } else {
+                axios
+                    .get(`${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${this.state.searchPlant}&per_page=${this.state.amount}`)
+                    .then(res => {
+                        this.setState({images: res.data.results})})
+                    .catch(err => console.log(err));
+            }
+        });
+    }
 
   selectImage = (e, img) => {
     e.preventDefault();
