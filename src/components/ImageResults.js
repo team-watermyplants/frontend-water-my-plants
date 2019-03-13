@@ -11,15 +11,14 @@ const ImageResults = props => {
                     {props.images.map(img => 
                         <div 
                             className='image-box'
-                            title={img.tags}
                             key={img.id}
                             subtitle={<span>by <strong>{img.user}</strong></span>}
                         >
                             <img 
                                 style={{cursor: 'pointer'}}
-                                src={img.webformatURL} 
-                                alt={img.tags} 
-                                onClick={e => props.selectImage(e, img.webformatURL)}/>
+                                src={img.urls.small} 
+                                alt={img.alt_description} 
+                                onClick={e => props.selectImage(e, img.urls.small)}/>
                         </div>
                         )}
                 </div>
