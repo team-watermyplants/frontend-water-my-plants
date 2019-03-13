@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { addPlant } from "../../actions";
+import { addPlant, updatePlant } from "../../actions";
 
 import ImageResults from "../ImageResults";
 
@@ -12,11 +12,11 @@ class PlantForm extends React.Component {
     this.state = {
       plant: {
         name: "",
-        searchPlant: "",
         description: "",
         location: "",
-        selectedImage: ""
+        plantURL: ""
       },
+      searchPlant: "",
       apiUrl: "https://pixabay.com/api",
       apiKey: "11850512-34a79ee2d04c5d7e18f774944",
       amount: 5,
@@ -67,7 +67,7 @@ class PlantForm extends React.Component {
 
   selectImage = (e, img) => {
     e.preventDefault();
-    this.setState({ selectedImage: img });
+    this.setState({ plantURL: img });
     this.setState({ images: [], searchPlant: "Plant image selected!" });
   };
 
@@ -76,21 +76,24 @@ class PlantForm extends React.Component {
     const userId = localStorage.getItem("userId");
     console.log("\nid", userId);
     const newPlant = {
-      name: this.state.plantName,
-      location: this.state.location,
-      description: this.state.description,
-      plantURL: this.state.selectedImage,
+      ...this.state.plant,
       userId
     };
-    this.props.addPlant(newPlant);
-
+    console.log(newPlant);
+    this.props.activePlant
+      ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
+          this.props.history.push("/");
+        })
+      : this.props.addPlant(newPlant).then(() => {
+          this.props.history.push("/");
+        });
     this.setState({
       plant: {
-        plantName: "",
+        name: "",
         searchPlant: "",
         location: "",
         description: "",
-        selectedImage: ""
+        plantURL: ""
       }
     });
   };
@@ -101,7 +104,7 @@ class PlantForm extends React.Component {
     }
     return (
       <div>
-        <h1>Add new plant</h1>
+        <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -155,5 +158,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPlant }
+  { addPlant, updatePlant }
 )(PlantForm);

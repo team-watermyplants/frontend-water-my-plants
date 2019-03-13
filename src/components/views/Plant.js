@@ -7,12 +7,12 @@ class Plant extends React.Component {
     plant: null
   };
   componentDidMount = () => {
-    this.props.getData(localStorage.getItem('userId')).then(() => {
+    const id = this.props.match.params.id;
+    this.props.getData(localStorage.getItem("userId")).then(() => {
       this.setState({
         plant: this.props.plants.find(plant => plant.id == id)
       });
     });
-    const id = this.props.match.params.id;
   };
   render() {
     if (!this.state.plant) {
