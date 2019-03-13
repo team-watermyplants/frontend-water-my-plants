@@ -26,7 +26,7 @@ class App extends Component {
           <section>
             <Route path="/login" render={props => <Login {...props} />} />
             <Route path="/sign-up" render={props => <SignUp {...props} />} />
-            <ProtectedRoute path="/" component={Home} />
+            <ProtectedRoute exact path="/" component={Home} />
             <ProtectedRoute path="/add-plant" component={PlantForm} />
             <ProtectedRoute path="/plant/:id" component={Plant} />
           </section>

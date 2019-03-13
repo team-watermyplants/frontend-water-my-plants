@@ -5,7 +5,7 @@ import { getData } from "../../actions";
 
 class Home extends React.Component {
   componentDidMount = () => {
-    const userId = localStorage.getItem("user id");
+    const userId = localStorage.getItem("userId");
     this.props.getData(userId);
   };
 
@@ -15,7 +15,7 @@ class Home extends React.Component {
         <ul>
           {this.props.plants.map(plant => {
             return (
-              <li>
+              <li key={plant.id}>
                 <div>
                   <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
                 </div>
@@ -34,7 +34,6 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     plants: state.listReducer.plants,
-    userInfo: state.login.userInfo
   };
 };
 
