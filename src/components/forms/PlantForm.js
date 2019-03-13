@@ -7,7 +7,6 @@ import { addPlant, updatePlant } from "../../actions";
 import ImageResults from "../ImageResults";
 
 class PlantForm extends React.Component {
-
   constructor(props) {
     super(props);
     this.state = {
@@ -18,13 +17,13 @@ class PlantForm extends React.Component {
         plantURL: ""
       },
       searchPlant: "",
-      apiUrl: 'https://api.unsplash.com/search/photos',
-      apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
+      apiUrl: "https://api.unsplash.com/search/photos",
+      apiKey:
+        "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
       amount: 1,
       images: []
     };
   }
-
 
   componentDidMount = () => {
     if (this.props.activePlant) {
@@ -36,21 +35,34 @@ class PlantForm extends React.Component {
     console.log(this.props.activePlant);
   };
 
+  searchChangeHandler = e => {
+    let val = e.target.value;
+    this.setState({ [e.target.name]: val }, () => {
+      if (val === "") {
+        this.setState({ images: [] });
+      } else {
+        axios
+          .get(
+            `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${
+              this.state.searchPlant
+            }&per_page=${this.state.amount}`
+          )
+          .then(res => {
+            this.setState({ images: res.data.results });
+          })
+          .catch(err => console.log(err));
+      }
+    });
+  };
 
-    searchChangeHandler = e => {
-        let val = e.target.value;
-        this.setState({[e.target.name]: val }, () => {
-            if (val === '') {
-                this.setState({images: []});
-            } else {
-                axios
-                    .get(`${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${this.state.searchPlant}&per_page=${this.state.amount}`)
-                    .then(res => {
-                        this.setState({images: res.data.results})})
-                    .catch(err => console.log(err));
-            }
-        });
-    }
+  changeHandler = e => {
+    this.setState({
+      plant: {
+        ...this.state.plant,
+        [e.target.name]: e.target.value
+      }
+    });
+  };
 
   selectImage = (e, img) => {
     e.preventDefault();
@@ -86,9 +98,6 @@ class PlantForm extends React.Component {
   };
 
   render() {
-    if (this.props.addingPlant) {
-      return <div>Planting...</div>;
-    }
     return (
       <div>
         <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>

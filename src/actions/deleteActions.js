@@ -7,7 +7,7 @@ export const deletePlant = id => dispatch => {
   dispatch({ type: DELETE_IN_PROGRESS });
 
   return axios
-    .delete(`https://api-plants.herokuapp.com/api/plants/${id}`)
+    .delete(`https://api-watermyplants.herokuapp.com/api/plants/${id}`)
     .then(res => {
       dispatch({
         type: DELETE_PLANT_SUCCESS,

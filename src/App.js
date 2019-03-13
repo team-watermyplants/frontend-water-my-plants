@@ -8,7 +8,6 @@ import PlantForm from "./components/forms/PlantForm";
 import Login from "./components/forms/Login";
 import SignUp from "./components/forms/SignUp";
 import Home from "./components/views/Home";
-import PlantCalendar from "./components/views/PlantCalendar";
 import Plant from "./components/views/Plant";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";

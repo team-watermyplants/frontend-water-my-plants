@@ -10,7 +10,7 @@ export const login = creds => dispatch => {
     type: REQUEST_IN_PROGRESS
   });
   return axios
-    .post("https://api-plants.herokuapp.com/auth/login", creds)
+    .post("https://api-watermyplants.herokuapp.com/auth/login", creds)
     .then(res => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
