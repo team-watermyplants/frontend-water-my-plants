@@ -8,7 +8,7 @@ export const getData = id => dispatch => {
   dispatch({
     type: REQUEST_IN_PROGRESS
   });
-  axios
+  return axios
     .get(`https://api-plants.herokuapp.com/api/users/${id}/plants`)
     .then(res => {
       dispatch({

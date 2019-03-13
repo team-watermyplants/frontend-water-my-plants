@@ -15,8 +15,7 @@ export const createUser = userInfo => dispatch => {
       localStorage.setItem("token", res.data.token);
       localStorage.setItem("userId", res.data.user.id);
       dispatch({
-        type: SIGN_UP_SUCCESS,
-        payload: res.data.user
+        type: SIGN_UP_SUCCESS
       });
     })
     .catch(err => console.log(err));
