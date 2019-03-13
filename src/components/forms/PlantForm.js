@@ -2,7 +2,7 @@ import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
 
-import { addPlant } from "../../actions";
+import { addPlant, updatePlant } from "../../actions";
 
 import ImageResults from "../ImageResults";
 
@@ -15,7 +15,7 @@ class PlantForm extends React.Component {
         name: "",
         description: "",
         location: "",
-        selectedImage: ""
+        plantURL: ""
       },
       searchPlant: "",
       apiUrl: 'https://api.unsplash.com/search/photos',
@@ -44,7 +44,7 @@ class PlantForm extends React.Component {
                 this.setState({images: []});
             } else {
                 axios
-                    .get(`${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${this.state.searchPlant}&page=${this.state.amount}`)
+                    .get(`${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${this.state.searchPlant}&per_page=${this.state.amount}`)
                     .then(res => {
                         this.setState({images: res.data.results})})
                     .catch(err => console.log(err));
@@ -54,7 +54,7 @@ class PlantForm extends React.Component {
 
   selectImage = (e, img) => {
     e.preventDefault();
-    this.setState({ selectedImage: img });
+    this.setState({ plantURL: img });
     this.setState({ images: [], searchPlant: "Plant image selected!" });
   };
 
@@ -63,87 +63,35 @@ class PlantForm extends React.Component {
     const userId = localStorage.getItem("userId");
     console.log("\nid", userId);
     const newPlant = {
-      name: this.state.plantName,
-      location: this.state.location,
-      description: this.state.description,
-      plantURL: this.state.selectedImage,
+      ...this.state.plant,
       userId
     };
-    this.props.addPlant(newPlant);
-
+    console.log(newPlant);
+    this.props.activePlant
+      ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
+          this.props.history.push("/");
+        })
+      : this.props.addPlant(newPlant).then(() => {
+          this.props.history.push("/");
+        });
     this.setState({
       plant: {
-        plantName: "",
+        name: "",
         searchPlant: "",
         location: "",
         description: "",
-        selectedImage: ""
+        plantURL: ""
       }
     });
   };
 
-<<<<<<< HEAD
-        if (this.props.addingPlant) {
-            return (
-                <div>Planting...</div>
-            )
-        }
-        console.log('images', this.state.images)
-        return (
-            <div>
-                <h1>Add new plant</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <input 
-                        type='text'
-                        name='plantName'
-                        value={this.state.plantName}
-                        onChange={this.changeHandler}
-                        placeholder='Plant Name ex. English Ivy, Ficus, etc'
-                    />
-                    <br />
-                    <input 
-                        type='text'
-                        name='location'
-                        value={this.state.location}
-                        onChange={this.changeHandler}
-                        placeholder='Location ex. Living room, kitchen, etc.'
-                    />
-                    <br />
-                    <input
-                        type='text'
-                        name='description'
-                        value={this.state.description}
-                        onChange={this.changeHandler}
-                        placeholder='Describe your plant'
-                    />
-                    <br />
-                    <input
-                        type='text'
-                        name='searchPlant'
-                        value={this.state.searchPlant}
-                        onChange={this.searchChangeHandler}
-                        placeholder='Enter plant to search'
-                    />
-                    {this.state.images.length > 0 ? (
-                        <ImageResults
-                            images={this.state.images}
-                            selectImage={this.selectImage}
-                            />): null}
-                    <br />
-                    <button>Add Plant</button>
-                    
-                </form>
-            </div>
-        )
-=======
   render() {
     if (this.props.addingPlant) {
       return <div>Planting...</div>;
->>>>>>> 8e46d276e4052fe69fb3d5c758c324bcf6b2a7f2
     }
     return (
       <div>
-        <h1>Add new plant</h1>
+        <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
@@ -197,5 +145,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPlant }
+  { addPlant, updatePlant }
 )(PlantForm);

@@ -12,12 +12,12 @@ export const handleUpdate = plant => dispatch => {
     })
 }
 
-export const updatePlant = id => dispatch => {
+export const updatePlant = (id, updatedPlant) => dispatch => {
 
     dispatch({ type: UPDATE_IN_PROGRESS });
 
-    axios
-        .put(`https://api-plants.herokuapp.com/plants/${id}`)
+    return axios
+        .put(`https://api-plants.herokuapp.com/api/plants/${id}`, updatedPlant)
         .then(res => {
             dispatch({
                 type: UPDATE_PLANT_SUCCESS,
