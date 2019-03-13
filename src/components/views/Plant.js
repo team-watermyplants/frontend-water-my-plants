@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { getData } from "../../actions";
+import { getPlant } from "../../actions";
 
 class Plant extends React.Component {
   state = {
@@ -8,11 +8,14 @@ class Plant extends React.Component {
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
-    this.props.getData(localStorage.getItem("userId")).then(() => {
+    console.log(id)
+    this.props.getPlant(id)
+    .then(res =>{
+      console.log(res.payload[0])
       this.setState({
-        plant: this.props.plants.find(plant => plant.id == id)
-      });
-    });
+        plant: res.payload[0]
+      })
+    })
   };
   render() {
     if (!this.state.plant) {
@@ -41,5 +44,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getData }
+  { getPlant }
 )(Plant);

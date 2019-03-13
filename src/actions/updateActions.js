@@ -17,7 +17,7 @@ export const updatePlant = (id, updatedPlant) => dispatch => {
     dispatch({ type: UPDATE_IN_PROGRESS });
 
     return axios
-        .put(`https://api-plants.herokuapp.com/api/plants/${id}`, updatedPlant)
+        .put(`https://api-watermyplants.herokuapp.com/api/plants/${id}`, updatedPlant)
         .then(res => {
             dispatch({
                 type: UPDATE_PLANT_SUCCESS,
