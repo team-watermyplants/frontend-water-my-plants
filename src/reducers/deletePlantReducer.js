@@ -3,7 +3,7 @@ import {
     DELETE_PLANT_SUCCESS 
 } from '../actions/deleteActions';
 
-initialState = {
+const initialState = {
     deletingPlant: false,
     plants: []
 }
