@@ -1,6 +1,12 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import DayPickerInput from 'react-day-picker/DayPickerInput';
+import 'react-day-picker/lib/style.css';
+
+import { formatDate, parseDate } from 'react-day-picker/moment';
+
+import 'moment/locale/it';
 
 import { addPlant, updatePlant } from "../../actions";
 
@@ -116,6 +122,17 @@ class PlantForm extends React.Component {
             onChange={this.changeHandler}
             placeholder="Describe your plant"
           />
+          <br />
+          <select>
+              <option>Every Day</option>
+              <option>Every Other Day</option>
+          </select>
+          <br />
+          <DayPickerInput
+            formatDate={formatDate}
+            parseDate={parseDate}
+            placeholder={`Start Date: ${formatDate(new Date())}`}
+      />
           <br />
           <input
             type="text"
