@@ -24,7 +24,7 @@ class PlantForm extends React.Component {
       searchPlant: '',
       apiUrl: 'https://api.unsplash.com/search/photos',
       apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
-      amount: 1,
+      amount: 5,
       images: [],
       startDate: Date.now()
     };
