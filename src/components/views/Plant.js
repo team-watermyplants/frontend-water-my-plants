@@ -1,21 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { getPlant } from "../../actions";
+import React from 'react';
+import { connect } from 'react-redux';
+import { getPlant } from '../../actions';
 
 class Plant extends React.Component {
   state = {
-    plant: null
+    plant: null,
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
-    console.log(id)
-    this.props.getPlant(id)
-    .then(res =>{
-      console.log(res)
+    console.log(id);
+    this.props.getPlant(id).then(res => {
+      console.log(res);
       this.setState({
-        plant: res
-      })
-    })
+        plant: res.payload.data[0],
+      });
+    });
   };
   render() {
     if (!this.state.plant) {
@@ -30,6 +29,9 @@ class Plant extends React.Component {
           <p>name: {this.state.plant.name}</p>
           <p>location: {this.state.plant.location}</p>
           <p>description: {this.state.plant.description}</p>
+          <p>
+            image: <img src={this.state.plant.plantURL} />
+          </p>
         </div>
       );
     }
@@ -38,7 +40,7 @@ class Plant extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants
+    plants: state.listReducer.plants,
   };
 };
 
