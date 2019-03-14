@@ -1,6 +1,10 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
+import DatePicker from 'react-datepicker';
+import "react-datepicker/dist/react-datepicker.css";
+
+import 'moment/locale/it';
 
 import { addPlant, updatePlant, cancelUpdate } from "../../actions";
 
@@ -21,7 +25,8 @@ class PlantForm extends React.Component {
       apiKey:
         "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
       amount: 1,
-      images: []
+      images: [],
+      startDate: new Date()
     };
   }
 
@@ -30,20 +35,17 @@ class PlantForm extends React.Component {
       this.setState({
         plant: this.props.activePlant
       });
-      console.log("its working");
     }
-    console.log(this.props.activePlant);
+  
   };
 
   searchChangeHandler = e => {
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
-      if (val === "") {
-        this.setState({ images: [] });
-      } else {
+      val === "" ? this.setState({ images: [] }) :
         axios
           .get(
-            `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${
+            `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=plant+${
               this.state.searchPlant
             }&per_page=${this.state.amount}`
           )
@@ -52,7 +54,7 @@ class PlantForm extends React.Component {
           })
           .catch(err => console.log(err));
       }
-    });
+    );
   };
 
   changeHandler = e => {
@@ -117,6 +119,20 @@ class PlantForm extends React.Component {
     });
   };
 
+  changeHandler = e => {
+      this.setState({
+          ...this.state.plant,
+          [e.target.name]: e.target.value
+      })
+  }
+
+  handleDateChange = date => {
+      console.log(date)
+      this.setState({
+          startDate: date
+      })
+  }
+
   render() {
     return (
       <div>
@@ -145,6 +161,17 @@ class PlantForm extends React.Component {
             onChange={this.changeHandler}
             placeholder="Describe your plant"
           />
+          <br />
+          <select>
+              <option>Every Day</option>
+              <option>Every Other Day</option>
+          </select>
+          <br />
+          <DatePicker
+            selected={this.state.startDate}
+            onChange={this.handleDateChange}
+            showTimeSelect
+     />
           <br />
           <input
             type="text"
