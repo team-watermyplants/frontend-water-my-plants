@@ -181,16 +181,21 @@ class PlantForm extends React.Component {
             </div>
 
             <div class='input-field'>
-              <DatePicker
-                selected={this.state.startDate}
-                onChange={this.handleDateChange}
-                showTimeSelect
-                timeIntervals={5}
-                dateFormat="MMM d, yyyy h:mm aa"
-                withPortal
-              />
+              <WaterDateTime>
+              <label>select start date</label>
+                <DatePicker
+                  class='datepicker'
+                  selected={this.state.startDate}
+                  onChange={this.handleDateChange}
+                  showTimeSelect
+                  timeIntervals={5}
+                  dateFormat="MMM d, yyyy h:mm aa"
+                  withPortal
+                />
+              </WaterDateTime>
             </div>
           </WaterSchedule>
+
           <div class='input-field'>
             <input
               type="text"
@@ -256,9 +261,18 @@ const Container = styled.div`
 
 const WaterSchedule = styled.div`
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
+`;
+
+const WaterDateTime = styled.div`
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #00796b;
+  border-radius: 5px;
+  padding: 5px;
+
 `;
 
 const H1 = styled.h1`
-  color: #00796b
+  color: #00796b;
 `;
