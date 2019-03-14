@@ -8,7 +8,7 @@ import { debounce } from 'lodash';
 
 import 'moment/locale/it';
 
-import { addPlant, updatePlant } from "../../actions";
+import { addPlant, updatePlant, cancelUpdate } from "../../actions";
 
 import ImageResults from "../ImageResults";
 
@@ -77,6 +77,26 @@ class PlantForm extends React.Component {
     e.preventDefault();
     this.setState({ plantURL: img });
     this.setState({ images: [], searchPlant: "Plant image selected!" });
+  };
+
+  handleUpdateCancel = () => {
+    this.setState({
+      plant: {
+        name: "",
+        description: "",
+        location: "",
+        plantURL: ""
+      },
+      searchPlant: "",
+      apiUrl: "https://api.unsplash.com/search/photos",
+      apiKey:
+        "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
+      amount: 1,
+      images: []
+    });
+
+    this.props.cancelUpdate();
+    this.props.history.push("/");
   };
 
   handleSubmit = e => {
@@ -178,7 +198,14 @@ class PlantForm extends React.Component {
             />
           ) : null}
           <br />
-          <button onClick={this.handleSubmit}>Add Plant</button>
+          <button onClick={this.handleSubmit}>
+            {this.props.activePlant ? "update plant" : "add plant"}
+          </button>
+          {this.props.activePlant ? (
+            <button onClick={this.handleUpdateCancel}>cancel</button>
+          ) : (
+            <div />
+          )}
         </form>
       </div>
     );
@@ -192,5 +219,5 @@ const mapStateToProps = state => ({
 
 export default connect(
   mapStateToProps,
-  { addPlant, updatePlant }
+  { addPlant, updatePlant, cancelUpdate }
 )(PlantForm);

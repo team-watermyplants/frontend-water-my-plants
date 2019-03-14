@@ -9,7 +9,7 @@ export const getPlant = id => dispatch => {
     .get(`https://api-watermyplants.herokuapp.com/api/plants/${id}`)
     .then(res => {
       return {
-        payload: res.data
+        payload: res
       };
     })
     .catch(err => console.log(err));

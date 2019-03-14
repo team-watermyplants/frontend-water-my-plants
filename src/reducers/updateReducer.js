@@ -2,7 +2,8 @@ import {
     UPDATE_IN_PROGRESS, 
     UPDATE_PLANT_SUCCESS,
     UPDATE_PLANT_FAILURE,
-    CREATE_UPDATE_FORM
+    CREATE_UPDATE_FORM,
+    CANCEL_UPDATE
 } from '../actions/updateActions';
 
 const initialState = {
@@ -28,13 +29,19 @@ export const updateReducer = (state = initialState, action) => {
             return {
                 ...state,
                 updatingPlant: false,
-                plants: action.payload
+                plants: action.payload,
+                activePlant: null
             }
         case UPDATE_PLANT_FAILURE:
             return {
                 ...state,
                 updatingPlant: false,
                 error: action.payload
+            }
+            case CANCEL_UPDATE:
+            return{
+                ...state,
+                activePlant: null
             }
         default:
         return state;
