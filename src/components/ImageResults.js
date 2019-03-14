@@ -1,43 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import M from "materialize-css";
-
 
 const ImageResults = props => {
-    
 
-
-        let imageList;
-
-        if(props.images) {
-            imageList = (
-                <div className='carousel'>
-
+        return (
+                    <>
                     {props.images.map(img => 
-                        <a 
-                            className='carousel-item'
-                            href=''
+                        <ImageCard
+
                             key={img.id}
-                            style={{cursor: 'pointer'}}
                             src={img.urls.small} 
                             alt={img.alt_description} 
-                            onClick={e => props.selectImage(e, img.urls.small)}
-                        ></a>
+                            onClick={e => props.selectImage(e, img.urls.small)}/>
                         )}
-                </div>
+                    </>
             )
-        } else {
-            imageList = null;
-        }
-
-    return (
-        
-    <div>
-        <H2>Select Image</H2>
-        {imageList}
-    </div>
-    )
 }
 
 ImageResults.propTypes = {
@@ -46,8 +24,12 @@ ImageResults.propTypes = {
 
 //styles
 
-const H2 = styled.h2`
-    color: #00796b;
+const ImageCard = styled.img`
+    cursor: pointer;
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
 `;
+
 
 export default ImageResults

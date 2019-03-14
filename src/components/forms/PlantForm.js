@@ -5,6 +5,9 @@ import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
 import styled from 'styled-components';
 import M from "materialize-css";
+import 'materialize-css/dist/css/materialize.min.css';
+
+import './PlantForm.css';
 
 
 import { addPlant, updatePlant, cancelUpdate } from '../../actions';
@@ -207,12 +210,18 @@ class PlantForm extends React.Component {
           </div>
 
           <div className='image-select-container'>
-          {this.state.images.length > 0 ? (
-            <ImageResults
-              images={this.state.images}
-              selectImage={this.selectImage}
-            />
-          ) : null}
+            <div className='imgSelectTitle'>
+              {this.state.images.length > 0 ? (
+                <h2>Select Image</h2>
+              ) : null}
+            </div>
+            <div className='image-display'>
+              {this.state.images.length > 0 ? (
+                <ImageResults
+                  images={this.state.images}
+                  selectImage={this.selectImage}/>
+              ) : null}
+            </div>
           </div>
 
           <button 
@@ -277,3 +286,4 @@ const WaterDateTime = styled.div`
 const H1 = styled.h1`
   color: #00796b;
 `;
+
