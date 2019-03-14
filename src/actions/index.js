@@ -3,7 +3,7 @@ import axios from "axios";
 export { REQUEST_IN_PROGRESS, LOGIN_SUCCESS, login } from "./loginActions";
 export { SIGN_UP_SUCCESS, createUser } from "./signUpActions";
 export { PLANT_REQUEST_SUCCESS, getPlantList } from "./listActions";
-export { handleUpdate, updatePlant } from "./updateActions";
+export { handleUpdate, updatePlant, cancelUpdate } from "./updateActions";
 export { deletePlant } from "./deleteActions";
 export { getPlant } from "./plantActions";
 

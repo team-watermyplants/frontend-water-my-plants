@@ -11,9 +11,9 @@ class Plant extends React.Component {
     console.log(id)
     this.props.getPlant(id)
     .then(res =>{
-      console.log(res.payload[0])
+      console.log(res)
       this.setState({
-        plant: res.payload[0]
+        plant: res
       })
     })
   };
