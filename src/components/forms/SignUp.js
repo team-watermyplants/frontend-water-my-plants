@@ -1,9 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
 import { createUser } from "../../actions";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
 import FormUserInfo from "./FormUserInfo";
 import FormPersonalInfo from "./FormPersonalInfo";
 
@@ -59,7 +56,7 @@ class SignUp extends React.Component {
     ) {
       console.log(this.state.NewUserInfo);
       this.props.createUser(this.state.NewUserInfo).then(() => {
-        this.props.history.push("/home");
+        this.props.history.push("/");
       });
     }
     this.setState({
