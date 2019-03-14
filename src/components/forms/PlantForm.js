@@ -30,9 +30,7 @@ class PlantForm extends React.Component {
       this.setState({
         plant: this.props.activePlant
       });
-      console.log("its working");
     }
-    console.log(this.props.activePlant);
   };
 
   searchChangeHandler = e => {
@@ -93,12 +91,10 @@ class PlantForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const userId = localStorage.getItem("userId");
-    console.log("\nid", userId);
     const newPlant = {
       ...this.state.plant,
       userId
     };
-    console.log(newPlant);
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
           this.props.history.push("/");

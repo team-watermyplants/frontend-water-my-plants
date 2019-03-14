@@ -16,6 +16,7 @@ export const deletePlantReducer = (state = initialState, action) => {
                 deletingPlant: true,
             }
         case DELETE_PLANT_SUCCESS:
+            console.log(action.payload)
             return {
                 ...state,
                 deletingPlant: false,

@@ -21,7 +21,8 @@ export const addPlant = newPlant => dispatch => {
       dispatch({
         type: ADD_PLANT_SUCCESS,
         payload: res.data
-      });
+      })
+      axios.post("https://api-watermyplants.herokuapp.com/api/notifications", {notificationTime: newPlant})
     })
     .catch(err => {
       dispatch({

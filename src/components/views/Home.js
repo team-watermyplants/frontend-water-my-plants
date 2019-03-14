@@ -17,7 +17,6 @@ class Home extends React.Component {
 
   handleDelete = (e, id) => {
     e.preventDefault();
-    console.log("id", id);
     this.props.deletePlant(id).then(() => {
       const userId = localStorage.getItem("userId");
       this.props.getPlantList(userId);
@@ -28,23 +27,29 @@ class Home extends React.Component {
   render() {
     return this.props.plants ? (
       <div>
-        <ul>
-          {this.props.plants.map(plant => {
-            return (
-              <li key={plant.id}>
-                <div>
-                  <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
-                  <button onClick={e => this.handleUpdate(e, plant)}>
-                    update
-                  </button>
-                  <button onClick={e => this.handleDelete(e, plant.id)}>
-                    delete
-                  </button>
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        {this.props.plants ? (
+          <div>
+            <p>u have no plants</p>
+          </div>
+        ) : (
+          <ul>
+            {this.props.plants.map(plant => {
+              return (
+                <li key={plant.id}>
+                  <div>
+                    <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
+                    <button onClick={e => this.handleUpdate(e, plant)}>
+                      update
+                    </button>
+                    <button onClick={e => this.handleDelete(e, plant.id)}>
+                      delete
+                    </button>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
       </div>
     ) : (
       <p>loading...</p>
@@ -53,7 +58,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     plants: state.listReducer.plants
   };
