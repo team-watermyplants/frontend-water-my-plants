@@ -42,9 +42,7 @@ class PlantForm extends React.Component {
   searchChangeHandler = e => {
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
-      if (val === "") {
-        this.setState({ images: [] });
-      } else {
+      val === "" ? this.setState({ images: [] }) :
         axios
           .get(
             `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=plant+${
@@ -56,7 +54,7 @@ class PlantForm extends React.Component {
           })
           .catch(err => console.log(err));
       }
-    });
+    );
   };
 
   changeHandler = e => {
