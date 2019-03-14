@@ -17,11 +17,14 @@ export const addPlant = newPlant => dispatch => {
   return axios
     .post("https://api-watermyplants.herokuapp.com/api/plants", newPlant)
     .then(res => {
-      console.log(res.data);
+      console.log("HERE!!!", res.data);
       dispatch({
         type: ADD_PLANT_SUCCESS,
         payload: res.data
       });
+      axios.post("https://api-watermyplants.herokuapp.com/api/notifications",
+      
+      {notificationTime: newPlant.startDate, userId: Number(newPlant.userId), plantId: res.data[0].id, smsDelivered: false})
     })
     .catch(err => {
       dispatch({

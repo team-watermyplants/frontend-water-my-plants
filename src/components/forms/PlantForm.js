@@ -105,7 +105,8 @@ class PlantForm extends React.Component {
     console.log("\nid", userId);
     const newPlant = {
       ...this.state.plant,
-      userId
+      userId,
+      startDate: this.state.startDate
     };
     console.log(newPlant);
     this.props.activePlant
@@ -121,7 +122,7 @@ class PlantForm extends React.Component {
         searchPlant: "",
         location: "",
         description: "",
-        plantURL: ""
+        plantURL: "",
       }
     });
   };
@@ -182,7 +183,7 @@ class PlantForm extends React.Component {
             selected={this.state.startDate}
             onChange={this.handleDateChange}
             showTimeSelect
-     />
+    />
           <br />
           <input
             type="text"
