@@ -1,11 +1,8 @@
 import React from "react";
 import { connect } from "react-redux";
 import axios from "axios";
-// import DayPickerInput from 'react-day-picker/DayPickerInput';
 import DatePicker from 'react-datepicker';
-// import 'react-day-picker/lib/style.css';
-
-import { formatDate, parseDate } from 'react-day-picker/moment';
+import "react-datepicker/dist/react-datepicker.css";
 
 import 'moment/locale/it';
 
@@ -38,9 +35,8 @@ class PlantForm extends React.Component {
       this.setState({
         plant: this.props.activePlant
       });
-      console.log("its working");
     }
-    console.log(this.props.activePlant);
+  
   };
 
   searchChangeHandler = e => {
@@ -51,7 +47,7 @@ class PlantForm extends React.Component {
       } else {
         axios
           .get(
-            `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=${
+            `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=plant+${
               this.state.searchPlant
             }&per_page=${this.state.amount}`
           )
@@ -154,11 +150,9 @@ class PlantForm extends React.Component {
           </select>
           <br />
           <DatePicker
-            formatDate={formatDate}
-            parseDate={parseDate}
-            placeholder={`Start Date: ${formatDate(new Date())}`}
             selected={this.state.startDate}
-            onChange={() => this.handleDateChange}
+            onChange={this.handleDateChange}
+            showTimeSelect
      />
           <br />
           <input
