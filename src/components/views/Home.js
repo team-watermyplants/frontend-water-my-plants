@@ -1,30 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { getPlantList, handleUpdate, deletePlant } from '../../actions';
+import React from "react";
+import { Link } from "react-router-dom";
+import { connect } from "react-redux";
+import { getPlantList, handleUpdate, deletePlant } from "../../actions";
 
 class Home extends React.Component {
   componentDidMount = () => {
-    const userId = localStorage.getItem('userId');
+    const userId = localStorage.getItem("userId");
     this.props.getPlantList(userId);
   };
 
   handleUpdate = (e, plant) => {
     e.preventDefault();
     this.props.handleUpdate(plant);
-    this.props.history.push('/add-plant');
+    this.props.history.push("/add-plant");
   };
 
   handleDelete = (e, id) => {
     e.preventDefault();
-    this.props.deletePlant(id).then(() => {
-      const userId = localStorage.getItem('userId');
-      this.props.getPlantList(userId);
-      this.props.history.push('/');
-    });
+    this.props
+      .deletePlant(id)
+      .then(() => {
+        const userId = localStorage.getItem("userId");
+        this.props.getPlantList(userId);
+        this.props.history.push("/");
+      })
+      .catch(() => {
+        this.props.history.push("/");
+      });
   };
 
   render() {
+    console.log(this.props.plants);
     return this.props.plants ? (
       <div>
         <ul>
@@ -54,7 +60,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants,
+    plants: state.listReducer.plants
   };
 };
 
