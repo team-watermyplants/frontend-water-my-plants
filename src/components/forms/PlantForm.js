@@ -137,7 +137,7 @@ class PlantForm extends React.Component {
         <H1>{this.props.activePlant ? 'update plant' : 'add plant'}</H1>
         <form onSubmit={this.handleSubmit}>
 
-          <div class='input-field'>
+          <div className='input-field'>
             <label>plant name</label>
             <input
               type="text"
@@ -148,7 +148,7 @@ class PlantForm extends React.Component {
             </input>
           </div>
 
-          <div class='input-field'>
+          <div className='input-field'>
           <label>location</label>
             <input
               type="text"
@@ -162,7 +162,7 @@ class PlantForm extends React.Component {
           <div class='input-field'>
             <label>description</label>
             <textarea
-              class='materialize-textarea'
+              className='materialize-textarea'
               name="description"
               value={this.state.plant.description}
               onChange={this.changeHandler}
@@ -171,7 +171,7 @@ class PlantForm extends React.Component {
           </div>
 
           <WaterSchedule>
-            <div class="input-field">
+            <div className="input-field">
               <select>
                 <option value='' disabled selected>choose option</option>
                 <option value='1'>every day</option>
@@ -184,7 +184,6 @@ class PlantForm extends React.Component {
               <WaterDateTime>
               <label>select start date</label>
                 <DatePicker
-                  class='datepicker'
                   selected={this.state.startDate}
                   onChange={this.handleDateChange}
                   showTimeSelect
@@ -224,7 +223,7 @@ class PlantForm extends React.Component {
           
           {this.props.activePlant ? (
             <button
-              className='btn waves-effect btn-large teal darken-2' 
+              className='btn-large teal darken-2' 
               onClick={this.handleUpdateCancel}>
               cancel
             </button>
@@ -251,7 +250,7 @@ export default connect(
 //Styled Components
 
 const Wrapper = styled.div`
-  max-width: 800px;
+  max-width: 600px;
   margin: 0 auto;
 `;
 
@@ -262,6 +261,7 @@ const Container = styled.div`
 const WaterSchedule = styled.div`
   display: flex;
   justify-content: space-between;
+  flex-basis: auto;
 `;
 
 const WaterDateTime = styled.div`
