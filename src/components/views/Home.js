@@ -21,8 +21,9 @@ class Home extends React.Component {
       .deletePlant(id)
       .then(() => {
         const userId = localStorage.getItem("userId");
-        this.props.getPlantList(userId);
-        this.props.history.push("/");
+        this.props.getPlantList(userId).then(() => {
+          this.props.history.push("/");
+        });
       })
       .catch(() => {
         this.props.history.push("/");
@@ -31,7 +32,7 @@ class Home extends React.Component {
 
   render() {
     console.log(this.props.plants);
-    return this.props.plants ? (
+    return this.props.plants.length > 0 ? (
       <div>
         <ul>
           {this.props.plants.map(plant => {
@@ -53,7 +54,7 @@ class Home extends React.Component {
         </ul>
       </div>
     ) : (
-      <p>loading...</p>
+      <p>no plants here</p>
     );
   }
 }

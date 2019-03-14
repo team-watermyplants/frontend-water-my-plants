@@ -4,7 +4,7 @@ const initialState = {
   communicating: false,
 };
 
-export const signUp = (state = initialState, action) => {
+export const signUpReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_IN_PROGRESS:
       return {
