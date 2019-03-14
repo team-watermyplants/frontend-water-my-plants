@@ -17,7 +17,6 @@ class Home extends React.Component {
 
   handleDelete = (e, id) => {
     e.preventDefault();
-    console.log('id', id);
     this.props.deletePlant(id).then(() => {
       const userId = localStorage.getItem('userId');
       this.props.getPlantList(userId);
@@ -54,7 +53,6 @@ class Home extends React.Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     plants: state.listReducer.plants,
   };

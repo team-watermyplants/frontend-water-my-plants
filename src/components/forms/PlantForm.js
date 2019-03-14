@@ -103,7 +103,6 @@ class PlantForm extends React.Component {
       userId,
       startDate: this.state.startDate,
     };
-    console.log(newPlant);
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
           this.props.history.push('/');
