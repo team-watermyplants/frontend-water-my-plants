@@ -4,6 +4,8 @@ import { createUser } from "../../actions";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import TextField from "material-ui/TextField";
 import RaisedButton from "material-ui/RaisedButton";
+import FormUserInfo from "./FormUserInfo";
+import FormPersonalInfo from "./FormPersonalInfo";
 
 class SignUp extends React.Component {
   state = {
@@ -28,14 +30,16 @@ class SignUp extends React.Component {
     });
   };
 
-  nextStep = () => {
+  nextStep = e => {
+    e.preventDefault();
     const { step } = this.state;
     this.setState({
       step: step + 1
     });
   };
 
-  prevStep = () => {
+  prevStep = e => {
+    e.preventDefault();
     const { step } = this.state;
     this.setState({
       step: step - 1
@@ -53,7 +57,7 @@ class SignUp extends React.Component {
       this.state.NewUserInfo.phoneNumber !== "" &&
       this.state.NewUserInfo.password == this.state.NewUserInfo.confirmPassword
     ) {
-      console.log(this.state.NewUserInfo)
+      console.log(this.state.NewUserInfo);
       this.props.createUser(this.state.NewUserInfo).then(() => {
         this.props.history.push("/home");
       });
@@ -71,60 +75,29 @@ class SignUp extends React.Component {
   };
 
   render() {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h1>sign up</h1>
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="firstName"
-          placeholder="first name"
-          value={this.state.NewUserInfo.firstName}
-          required
-        />
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="lastName"
-          placeholder="last name"
-          value={this.state.NewUserInfo.lastName}
-          required
-        />
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="username"
-          placeholder="username"
-          value={this.state.NewUserInfo.username}
-          required
-        />
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="password"
-          placeholder="password"
-          value={this.state.NewUserInfo.password}
-          required
-        />
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="confirmPassword"
-          placeholder="confirm password"
-          value={this.state.NewUserInfo.confirmPassword}
-          required
-        />
-        <input
-          onChange={this.handleChanges}
-          type="text"
-          name="phoneNumber"
-          placeholder="phone number"
-          value={this.state.NewUserInfo.phoneNumber}
-          required
-        />
-        <button>Sign Up</button>
-      </form>
-    );
+    switch (this.state.step) {
+      case 1:
+        return (
+          <FormPersonalInfo
+            nextStep={this.nextStep}
+            handleChanges={this.handleChanges}
+            firstName={this.state.NewUserInfo.firstName}
+            lastName={this.state.NewUserInfo.lastName}
+          />
+        );
+      case 2:
+        return (
+          <FormUserInfo
+            prevStep={this.prevStep}
+            handleChanges={this.handleChanges}
+            handleSubmit={this.handleSubmit}
+            username={this.state.NewUserInfo.username}
+            password={this.state.NewUserInfo.password}
+            confirmPassword={this.state.NewUserInfo.confirmPassword}
+            phoneNumber={this.state.NewUserInfo.phoneNumber}
+          />
+        );
+    }
   }
 }
 
