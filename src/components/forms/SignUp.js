@@ -75,33 +75,48 @@ class SignUp extends React.Component {
   };
 
   render() {
-    switch (this.state.step) {
-      case 1:
+    switch (this.props.communicating) {
+      case true:
         return (
-          <FormPersonalInfo
-            nextStep={this.nextStep}
-            handleChanges={this.handleChanges}
-            firstName={this.state.NewUserInfo.firstName}
-            lastName={this.state.NewUserInfo.lastName}
-          />
+          <div>
+            <p>loading...</p>
+          </div>
         );
-      case 2:
-        return (
-          <FormUserInfo
-            prevStep={this.prevStep}
-            handleChanges={this.handleChanges}
-            handleSubmit={this.handleSubmit}
-            username={this.state.NewUserInfo.username}
-            password={this.state.NewUserInfo.password}
-            confirmPassword={this.state.NewUserInfo.confirmPassword}
-            phoneNumber={this.state.NewUserInfo.phoneNumber}
-          />
-        );
+      case false:
+        switch (this.state.step) {
+          case 1:
+            return (
+              <FormPersonalInfo
+                nextStep={this.nextStep}
+                handleChanges={this.handleChanges}
+                firstName={this.state.NewUserInfo.firstName}
+                lastName={this.state.NewUserInfo.lastName}
+              />
+            );
+          case 2:
+            return (
+              <FormUserInfo
+                prevStep={this.prevStep}
+                handleChanges={this.handleChanges}
+                handleSubmit={this.handleSubmit}
+                username={this.state.NewUserInfo.username}
+                password={this.state.NewUserInfo.password}
+                confirmPassword={this.state.NewUserInfo.confirmPassword}
+                phoneNumber={this.state.NewUserInfo.phoneNumber}
+              />
+            );
+        }
     }
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    communicating: state.signUpReducer.communicating
+  };
+};
+
 export default connect(
-  null,
+  mapStateToProps,
   { createUser }
 )(SignUp);
