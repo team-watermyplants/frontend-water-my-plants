@@ -1,11 +1,11 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { getData, deletePlant } from "../../actions";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getData, deletePlant } from '../../actions';
 
 class Home extends React.Component {
   componentDidMount = () => {
-    const userId = localStorage.getItem("user id");
+    const userId = localStorage.getItem('user id');
     this.props.getData(userId);
   };
 
@@ -34,7 +34,7 @@ const mapStateToProps = state => {
   console.log(state);
   return {
     plants: state.listReducer.plants,
-    userInfo: state.login.userInfo
+    userInfo: state.login.userInfo,
   };
 };
 

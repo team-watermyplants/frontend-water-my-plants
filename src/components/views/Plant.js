@@ -9,13 +9,15 @@ import {
 
 class Plant extends React.Component {
   state = {
-    plant: null
+    plant: null,
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
+    console.log(id);
     this.props.getPlant(id).then(res => {
+      console.log(res);
       this.setState({
-        plant: res.payload.data[0]
+        plant: res.payload.data[0],
       });
     });
   };
@@ -56,6 +58,9 @@ class Plant extends React.Component {
           <button onClick={e => this.handleDelete(e, this.state.plant.id)}>
             delete
           </button>
+          <p>
+            image: <img src={this.state.plant.plantURL} />
+          </p>
         </div>
       );
     }
@@ -64,7 +69,7 @@ class Plant extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants
+    plants: state.listReducer.plants,
   };
 };
 
