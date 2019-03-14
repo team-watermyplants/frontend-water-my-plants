@@ -256,6 +256,7 @@ const Wrapper = styled.div`
 
 const Container = styled.div`
   width: 100%;
+  padding: 10px;
 `;
 
 const WaterSchedule = styled.div`
