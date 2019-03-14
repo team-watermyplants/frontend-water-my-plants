@@ -21,8 +21,9 @@ class Home extends React.Component {
       .deletePlant(id)
       .then(() => {
         const userId = localStorage.getItem("userId");
-        this.props.getPlantList(userId);
-        this.props.history.push("/");
+        this.props.getPlantList(userId).then(() => {
+          this.props.history.push("/");
+        });
       })
       .catch(() => {
         this.props.history.push("/");
