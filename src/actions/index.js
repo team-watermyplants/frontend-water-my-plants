@@ -17,11 +17,12 @@ export const addPlant = newPlant => dispatch => {
   return axios
     .post('https://api-watermyplants.herokuapp.com/api/plants', newPlant)
     .then(res => {
-      console.log(res.data);
+      console.log("HERE!!!", res.data);
       dispatch({
         type: ADD_PLANT_SUCCESS,
         payload: res.data,
       });
+
       axios
         .post('https://api-watermyplants.herokuapp.com/api/notifications', {
           notificationTime: newPlant.startDate,
@@ -30,6 +31,7 @@ export const addPlant = newPlant => dispatch => {
           smsDelivered: false,
         })
         .then(notification => console.log(notification));
+
     })
     .catch(err => {
       dispatch({
@@ -38,3 +40,5 @@ export const addPlant = newPlant => dispatch => {
       });
     });
 };
+
+
