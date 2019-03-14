@@ -2,8 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
+import { debounce } from 'lodash';
 import 'react-datepicker/dist/react-datepicker.css';
-
 import { addPlant, updatePlant, cancelUpdate } from '../../actions';
 
 import ImageResults from '../ImageResults';
@@ -70,7 +70,7 @@ class PlantForm extends React.Component {
     this.setState({
       images: [],
       searchPlant: 'Plant image selected!',
-      plantURL: img,
+      plant: { ...this.state.plant, plantURL: img },
     });
   };
 
