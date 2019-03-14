@@ -2,6 +2,8 @@ import React, { Component } from "react";
 import { Route, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
+import 'materialize-css/dist/css/materialize.min.css';
+
 import ProtectedRoute from "./components/ProtectedRoute";
 
 import PlantForm from "./components/forms/PlantForm";
