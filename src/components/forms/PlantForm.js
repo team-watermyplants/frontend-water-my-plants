@@ -3,6 +3,8 @@ import { connect } from "react-redux";
 import axios from "axios";
 import DatePicker from 'react-datepicker';
 import "react-datepicker/dist/react-datepicker.css";
+import { debounce } from 'lodash';
+
 
 import 'moment/locale/it';
 
@@ -26,7 +28,7 @@ class PlantForm extends React.Component {
         "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
       amount: 1,
       images: [],
-      startDate: new Date()
+      startDate: Date.now()
     };
   }
 
@@ -42,8 +44,13 @@ class PlantForm extends React.Component {
   searchChangeHandler = e => {
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
-      val === "" ? this.setState({ images: [] }) :
-        axios
+      if (val === "") {
+        this.setState({ images: [] });
+      } else {
+        console.log('hello')
+        debounce(() => {
+          console.log('hello')
+          axios
           .get(
             `${this.state.apiUrl}/?client_id=${this.state.apiKey}&query=plant+${
               this.state.searchPlant
@@ -52,15 +59,15 @@ class PlantForm extends React.Component {
           .then(res => {
             this.setState({ images: res.data.results });
           })
-          .catch(err => console.log(err));
+          .catch(err => console.log(err))}, 4000)
       }
-    );
+    })
   };
 
   changeHandler = e => {
     this.setState({
       plant: {
-        ...this.state.plant,
+        // ...this.state.plant,
         [e.target.name]: e.target.value
       }
     });
@@ -100,9 +107,13 @@ class PlantForm extends React.Component {
   };
 
   changeHandler = e => {
+
       this.setState({
-          ...this.state.plant,
+        ...this.state,
+        plant: {
+            ...this.state.plant,
           [e.target.name]: e.target.value
+        }
       })
   }
 
@@ -116,7 +127,7 @@ class PlantForm extends React.Component {
   render() {
     return (
       <div>
-        <h1>{this.props.activePlant ? "update plant" : "add plant"}</h1>
+        <h1>{this.props.activePlant ? "update plant" : "Add"}</h1>
         <form onSubmit={this.handleSubmit}>
           <input
             type="text"
