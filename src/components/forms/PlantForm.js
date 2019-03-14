@@ -36,6 +36,7 @@ class PlantForm extends React.Component {
         plant: this.props.activePlant,
       });
     }
+    //Materialize select menu
     M.AutoInit();
   };
 
@@ -133,7 +134,7 @@ class PlantForm extends React.Component {
     return (
       <Wrapper>
         <Container>
-        <h1>{this.props.activePlant ? 'update plant' : 'add plant'}</h1>
+        <H1>{this.props.activePlant ? 'update plant' : 'add plant'}</H1>
         <form onSubmit={this.handleSubmit}>
 
           <div class='input-field'>
@@ -169,7 +170,7 @@ class PlantForm extends React.Component {
             </textarea>
           </div>
 
-          <WaterSelect>
+          <WaterSchedule>
             <div class="input-field">
               <select>
                 <option value='' disabled selected>choose option</option>
@@ -189,7 +190,7 @@ class PlantForm extends React.Component {
                 withPortal
               />
             </div>
-          </WaterSelect>
+          </WaterSchedule>
           <div class='input-field'>
             <input
               type="text"
@@ -253,8 +254,11 @@ const Container = styled.div`
   width: 100%;
 `;
 
-const WaterSelect = styled.div`
+const WaterSchedule = styled.div`
   display: flex;
   justify-content: space-around;
+`;
 
+const H1 = styled.h1`
+  color: #00796b
 `;
