@@ -1,13 +1,14 @@
 import axios from "axios";
 
-export const REQUEST_IN_PROGRESS = "REQUEST_IN_PROGRESS";
+export const LOGIN_IN_PROGRESS = "LOGIN_IN_PROGRESS";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAILURE = 'LOGIN_FAILURE'
 
 export const login = creds => dispatch => {
   console.log("logging in");
 
   dispatch({
-    type: REQUEST_IN_PROGRESS
+    type: LOGIN_IN_PROGRESS
   });
   return axios
     .post("https://api-watermyplants.herokuapp.com/auth/login", creds)
@@ -18,5 +19,10 @@ export const login = creds => dispatch => {
         type: LOGIN_SUCCESS
       });
     })
-    .catch(err => console.log("error: ", err));
+    .catch(err => {
+      dispatch({
+        type: LOGIN_FAILURE
+      })
+      console.log("error: ", err)
+    });
 };

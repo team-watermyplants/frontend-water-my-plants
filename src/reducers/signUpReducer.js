@@ -1,4 +1,4 @@
-import { REQUEST_IN_PROGRESS, SIGN_UP_SUCCESS } from "../actions";
+import { SIGNUP_IN_PROGRESS, SIGN_UP_SUCCESS } from "../actions";
 
 const initialState = {
   communicating: false,
@@ -6,7 +6,7 @@ const initialState = {
 
 export const signUpReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_IN_PROGRESS:
+    case SIGNUP_IN_PROGRESS:
       return {
         ...state,
         communicating: true

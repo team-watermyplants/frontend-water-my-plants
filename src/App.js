@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-import 'materialize-css/dist/css/materialize.min.css';
+import "materialize-css/dist/css/materialize.min.css";
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -14,6 +14,11 @@ import Plant from "./components/views/Plant";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
 class App extends Component {
+  handleLogOut = e => {
+    e.preventDefault();
+    localStorage.clear();
+    this.props.history.push('/login')
+  };
   render() {
     return (
       <MuiThemeProvider>
@@ -22,6 +27,9 @@ class App extends Component {
             <AppBar title="Water My Plants">
               <NavLink to="/">Home</NavLink>
               <NavLink to="/add-plant">Add Plant</NavLink>
+              <button onClick={this.handleLogOut}>
+                Log Out
+              </button>
             </AppBar>
           ) : (
             <AppBar title="Water My Plants">

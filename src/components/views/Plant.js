@@ -6,20 +6,35 @@ import {
   deletePlant,
   getPlantList
 } from "../../actions";
+import axios from "axios";
 
 class Plant extends React.Component {
   state = {
-    plant: null,
+    notifications: [],
+    plant: null
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
     console.log(id);
-    this.props.getPlant(id).then(res => {
-      console.log(res);
-      this.setState({
-        plant: res.payload.data[0],
+    this.props
+      .getPlant(id)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          plant: res.payload.data[0]
+        });
+      })
+      .then(() => {
+        axios
+          .get(
+            `https://api-watermyplants.herokuapp.com/api/plants/${id}/notifications`
+          )
+          .then(res => {
+            this.setState({
+              notifications: res.data
+            });
+          });
       });
-    });
   };
 
   handleUpdate = (e, plant) => {
@@ -61,6 +76,17 @@ class Plant extends React.Component {
           <p>
             image: <img src={this.state.plant.plantURL} />
           </p>
+          <ul>
+            {this.state.notifications.map(notification => {
+              return (
+                <li>
+                  <div>
+                    <p>{JSON.stringify(notification)}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       );
     }
@@ -69,7 +95,7 @@ class Plant extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants,
+    plants: state.listReducer.plants
   };
 };
 

@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { REQUEST_IN_PROGRESS } from "./index";
+export const REQUEST_IN_PROGRESS = 'REQUEST_IN_PROGRESS'
 
 export const PLANT_REQUEST_SUCCESS = "PLANT_REQUEST_SUCCESS";
 
