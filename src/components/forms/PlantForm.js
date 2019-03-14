@@ -167,6 +167,9 @@ class PlantForm extends React.Component {
             selected={this.state.startDate}
             onChange={this.handleDateChange}
             showTimeSelect
+            timeIntervals={5}
+            dateFormat="MMM d, yyyy h:mm aa"
+            withPortal
           />
           <br />
           <input
