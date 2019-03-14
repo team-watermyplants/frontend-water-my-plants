@@ -4,7 +4,7 @@ const initialState = {
   communicating: false,
 };
 
-export const login = (state = initialState, action) => {
+export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
     case REQUEST_IN_PROGRESS:
       return {

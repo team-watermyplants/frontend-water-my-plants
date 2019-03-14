@@ -31,7 +31,7 @@ class Home extends React.Component {
 
   render() {
     console.log(this.props.plants);
-    return this.props.plants ? (
+    return this.props.plants.length > 0 ? (
       <div>
         <ul>
           {this.props.plants.map(plant => {
@@ -53,7 +53,7 @@ class Home extends React.Component {
         </ul>
       </div>
     ) : (
-      <p>loading...</p>
+      <p>no plants here</p>
     );
   }
 }
