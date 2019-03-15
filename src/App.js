@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Route, NavLink, withRouter } from "react-router-dom";
 import { connect } from "react-redux";
 
-
+import './App.css';
 
 import ProtectedRoute from "./components/ProtectedRoute";
 
@@ -13,6 +13,8 @@ import Home from "./components/views/Home";
 import Plant from "./components/views/Plant";
 import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
 import AppBar from "material-ui/AppBar";
+
+
 class App extends Component {
   render() {
     return (

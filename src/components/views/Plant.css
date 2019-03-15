@@ -1,0 +1,18 @@
+.plant-conainer {
+    display: flex;
+    
+}
+
+.plant-name {
+    align-self: center;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.plant-image {
+   
+}

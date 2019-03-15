@@ -7,6 +7,10 @@ import {
   getPlantList
 } from "../../actions";
 
+import 'materialize-css/dist/css/materialize.min.css';
+
+import './Plant.css';
+
 class Plant extends React.Component {
   state = {
     plant: null,
@@ -48,19 +52,31 @@ class Plant extends React.Component {
       );
     } else {
       return (
-        <div>
-          <p>name: {this.state.plant.name}</p>
-          <p>location: {this.state.plant.location}</p>
-          <p>description: {this.state.plant.description}</p>
-          <button onClick={e => this.handleUpdate(e, this.state.plant)}>
-            update
-          </button>
-          <button onClick={e => this.handleDelete(e, this.state.plant.id)}>
-            delete
-          </button>
-          <p>
-            image: <img src={this.state.plant.plantURL} />
-          </p>
+        <div className='plant-container'>
+          <h1 className='plant-name'>{this.state.plant.name}</h1>
+
+          <div class="row">
+          <div class="col s12 m6">
+            <div class="card teal lighten-1">
+              <div class="card-content white-text">
+                <span class="card-title">location: {this.state.plant.location}</span>
+                <p>description: {this.state.plant.description}</p>
+              </div>
+              <div class="card-action">
+                <button className='btn-large teal darken-2' onClick={e => this.handleUpdate(e, this.state.plant)}>
+              update
+            </button>
+            <button className='btn-large teal darken-2' onClick={e => this.handleDelete(e, this.state.plant.id)}>
+              delete
+            </button>
+              </div>
+            </div>
+          </div>
+        </div>
+          <h4></h4>
+          <h4></h4>
+          
+            <img className='z-depth-2' src={this.state.plant.plantURL} />
         </div>
       );
     }
