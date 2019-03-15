@@ -112,13 +112,14 @@ class PlantForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
-    const interval = document.getElementById('interval');
-    console.log(interval);
+    const intervalValue = this.state.selectedOption
+      ? this.state.selectedOption.value
+      : null;
     const newPlant = {
       ...this.state.plant,
       userId,
       startDate: this.state.startDate,
-      interval: this.state.selectedOption.value,
+      interval: intervalValue,
     };
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
