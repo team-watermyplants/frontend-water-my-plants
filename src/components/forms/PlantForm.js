@@ -2,19 +2,21 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import "react-datepicker/dist/react-datepicker.css";
+import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
-import M from "materialize-css";
+import M from 'materialize-css';
 import 'materialize-css/dist/css/materialize.min.css';
-
+import Select from 'react-select';
 import './PlantForm.css';
-
 
 import { addPlant, updatePlant, cancelUpdate } from '../../actions';
 
 import ImageResults from '../ImageResults';
-
-
+const options = [
+  { value: 1, label: 'every day' },
+  { value: 2, label: 'every other day' },
+  { value: 7, label: 'once a week' },
+];
 class PlantForm extends React.Component {
   constructor(props) {
     super(props);
@@ -27,11 +29,12 @@ class PlantForm extends React.Component {
       },
       searchPlant: '',
       apiUrl: 'https://api.unsplash.com/search/photos',
-      apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
+      apiKey:
+        '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 5,
       images: [],
-      startDate: Date.now()
-
+      startDate: Date.now(),
+      selectedOption: null,
     };
   }
 
@@ -93,7 +96,8 @@ class PlantForm extends React.Component {
       },
       searchPlant: '',
       apiUrl: 'https://api.unsplash.com/search/photos',
-      apiKey: '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
+      apiKey:
+        '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 1,
       images: [],
     });
@@ -105,10 +109,14 @@ class PlantForm extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const userId = localStorage.getItem('userId');
+    const intervalValue = this.state.selectedOption
+      ? this.state.selectedOption.value
+      : null;
     const newPlant = {
       ...this.state.plant,
       userId,
-      startDate: this.state.startDate
+      startDate: this.state.startDate,
+      interval: intervalValue,
     };
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
@@ -119,13 +127,12 @@ class PlantForm extends React.Component {
         });
     this.setState({
       plant: {
-        name: "",
-        searchPlant: "",
-        location: "",
-        description: "",
-        plantURL: "",
-      }
- 
+        name: '',
+        searchPlant: '',
+        location: '',
+        description: '',
+        plantURL: '',
+      },
     });
   };
 
@@ -135,115 +142,133 @@ class PlantForm extends React.Component {
     });
   };
 
+  handleSelectChange = selectedOption => {
+    this.setState({ selectedOption });
+    console.log(`Option selected:`, selectedOption);
+  };
+
   render() {
     return (
       <Wrapper>
         <Container>
-        <H1>{this.props.activePlant ? 'update plant' : 'add plant'}</H1>
-        <form onSubmit={this.handleSubmit}>
-
-          <div className='input-field'>
-            <label>plant name</label>
-            <input
-              type="text"
-              name="name"
-              value={this.state.plant.name}
-              onChange={this.changeHandler}
-              >
-            </input>
-          </div>
-
-          <div className='input-field'>
-          <label>location</label>
-            <input
-              type="text"
-              name="location"
-              value={this.state.plant.location}
-              onChange={this.changeHandler}
-              >
-            </input>
-          </div>
-
-          <div class='input-field'>
-            <label>description</label>
-            <textarea
-              className='materialize-textarea'
-              name="description"
-              value={this.state.plant.description}
-              onChange={this.changeHandler}
-              >
-            </textarea>
-          </div>
-
-          <WaterSchedule>
+          <H1>{this.props.activePlant ? 'update plant' : 'add plant'}</H1>
+          <form onSubmit={this.handleSubmit}>
             <div className="input-field">
-              <select>
-                <option value='' disabled selected>choose option</option>
-                <option value='1'>every day</option>
-                <option value='2'>every other day</option>
-              </select>
-              <label>select watering option</label>
+              <label>plant name</label>
+              <input
+                type="text"
+                name="name"
+                value={this.state.plant.name}
+                onChange={this.changeHandler}
+              />
             </div>
 
-            <div class='input-field'>
-              <WaterDateTime>
-              <label>select start date</label>
-                <DatePicker
-                  selected={this.state.startDate}
-                  onChange={this.handleDateChange}
-                  showTimeSelect
-                  timeIntervals={5}
-                  dateFormat="MMM d, yyyy h:mm aa"
-                  withPortal
+            <div className="input-field">
+              <label>location</label>
+              <input
+                type="text"
+                name="location"
+                value={this.state.plant.location}
+                onChange={this.changeHandler}
+              />
+            </div>
+
+            <div class="input-field">
+              <label>description</label>
+              <textarea
+                className="materialize-textarea"
+                name="description"
+                value={this.state.plant.description}
+                onChange={this.changeHandler}
+              />
+            </div>
+
+            <WaterSchedule>
+              <div
+                className="input-field"
+                style={{
+                  width: '200px',
+                  position: 'relative',
+                  bottom: '8px',
+                }}
+              >
+                <div
+                  style={{
+                    color: '#9e9e9e',
+                    fontSize: '.8rem',
+                    position: 'relative',
+                    top: '20px',
+                    left: '5px',
+                    zIndex: '100',
+                  }}
+                >
+                  select watering schedule
+                </div>
+                <Select
+                  value={this.state.selectedOption}
+                  onChange={this.handleSelectChange}
+                  options={options}
                 />
-              </WaterDateTime>
-            </div>
-          </WaterSchedule>
+              </div>
 
-          <div class='input-field'>
-            <input
-              type="text"
-              name="searchPlant"
-              value={this.state.searchPlant}
-              onChange={this.searchChangeHandler}
-              placeholder="Enter plant to search"
-            >
-            </input>
-          </div>
+              <div class="input-field">
+                <WaterDateTime>
+                  <label>select start date</label>
+                  <DatePicker
+                    selected={this.state.startDate}
+                    onChange={this.handleDateChange}
+                    showTimeSelect
+                    timeIntervals={5}
+                    dateFormat="MMM d, yyyy h:mm aa"
+                    withPortal
+                  />
+                </WaterDateTime>
+              </div>
+            </WaterSchedule>
 
-          <div className='image-select-container'>
-            <div className='imgSelectTitle'>
-              {this.state.images.length > 0 ? (
-                <h2>Select Image</h2>
-              ) : null}
+            <div class="input-field">
+              <input
+                type="text"
+                name="searchPlant"
+                value={this.state.searchPlant}
+                onChange={this.searchChangeHandler}
+                placeholder="Enter plant to search"
+              />
             </div>
-            <div className='image-display'>
-              {this.state.images.length > 0 ? (
-                <ImageResults
-                  className='image-card'
-                  images={this.state.images}
-                  selectImage={this.selectImage}/>
-              ) : null}
-            </div>
-          </div>
 
-          <button 
-            className='btn waves-effect btn-large teal darken-2' 
-            onClick={this.handleSubmit}>
-            {this.props.activePlant ? 'update plant' : 'add plant'}
-          </button>
-          
-          {this.props.activePlant ? (
+            <div className="image-select-container">
+              <div className="imgSelectTitle">
+                {this.state.images.length > 0 ? <h2>Select Image</h2> : null}
+              </div>
+              <div className="image-display">
+                {this.state.images.length > 0 ? (
+                  <ImageResults
+                    className="image-card"
+                    images={this.state.images}
+                    selectImage={this.selectImage}
+                  />
+                ) : null}
+              </div>
+            </div>
+
             <button
-              className='btn-large teal darken-2' 
-              onClick={this.handleUpdateCancel}>
-              cancel
-
+              className="btn waves-effect btn-large teal darken-2"
+              onClick={this.handleSubmit}
+            >
+              {this.props.activePlant ? 'update plant' : 'add plant'}
             </button>
-          ) : (
-            <div />
-          )}
-        </form>
+
+            {this.props.activePlant ? (
+              <button
+                className="btn-large teal darken-2"
+                onClick={this.handleUpdateCancel}
+              >
+                cancel
+              </button>
+            ) : (
+              <div />
+            )}
+          </form>
         </Container>
       </Wrapper>
     );
@@ -284,10 +309,8 @@ const WaterDateTime = styled.div`
   border: 1px solid #00796b;
   border-radius: 5px;
   padding: 5px;
-
 `;
 
 const H1 = styled.h1`
   color: #00796b;
 `;
-
