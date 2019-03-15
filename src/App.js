@@ -13,6 +13,8 @@ import Home from './components/views/Home';
 import Plant from './components/views/Plant';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 import AppBar from 'material-ui/AppBar';
+import './App.css';
+
 class App extends Component {
   handleLogOut = e => {
     e.preventDefault();
@@ -35,21 +37,14 @@ class App extends Component {
               }}
             >
               <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-                <i class="fas fa-seedling fa-3x" style={{ marginLeft: 20 }} />
+                <i
+                  class="fas fa-seedling fa-3x"
+                  style={{ margin: '10px 15px 0px' }}
+                />
               </Link>
               <div style={{ display: 'flex' }}>
                 <NavLink
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '20px',
-                    height: '40px',
-                    marginRight: '20px',
-                    border: '1px solid white',
-                    borderRadius: '2.5px',
-                    padding: '0 20px',
-                  }}
+                  className="app--navlink"
                   activeStyle={{
                     color: '#00796B',
                     background: 'white',
@@ -60,17 +55,7 @@ class App extends Component {
                   Home
                 </NavLink>
                 <NavLink
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '20px',
-                    height: '40px',
-                    padding: '0 20px',
-                    marginRight: '10px',
-                    border: '1px solid white',
-                    borderRadius: '2.5px',
-                  }}
+                  className="app--navlink"
                   activeStyle={{
                     color: '#00796B',
                     background: 'white',
@@ -79,22 +64,7 @@ class App extends Component {
                 >
                   Add Plant
                 </NavLink>
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    cursor: 'pointer',
-                    background: 'none',
-                    color: 'white',
-                    fontSize: '20px',
-                    height: '40px',
-                    padding: '0 20px',
-                    marginRight: '10px',
-                    border: '1px solid white',
-                    borderRadius: '2.5px',
-                  }}
-                  onClick={this.handleLogOut}
-                >
+                <div className="app--navlink" onClick={this.handleLogOut}>
                   Log Out
                 </div>
               </div>
@@ -111,21 +81,14 @@ class App extends Component {
               }}
             >
               <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
-                <i class="fas fa-seedling fa-3x" style={{ marginLeft: 20 }} />
+                <i
+                  class="fas fa-seedling fa-3x"
+                  style={{ margin: '10px 15px 0px' }}
+                />
               </Link>
               <div style={{ display: 'flex' }}>
                 <NavLink
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '20px',
-                    height: '40px',
-                    marginRight: '20px',
-                    border: '1px solid white',
-                    borderRadius: '2.5px',
-                    padding: '0 20px',
-                  }}
+                  className="app--navlink"
                   activeStyle={{
                     color: '#00796B',
                     background: 'white',
@@ -135,17 +98,7 @@ class App extends Component {
                   Login
                 </NavLink>
                 <NavLink
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    color: 'white',
-                    fontSize: '20px',
-                    height: '40px',
-                    marginRight: '20px',
-                    border: '1px solid white',
-                    borderRadius: '2.5px',
-                    padding: '0 20px',
-                  }}
+                  className="app--navlink"
                   activeStyle={{
                     color: '#00796B',
                     background: 'white',
