@@ -1,0 +1,41 @@
+.plant-conainer {
+    display: flex;
+    
+}
+
+.top-card {
+    display: flex;
+
+}
+.plant-name {
+    align-self: center;
+}
+
+.notif-box {
+    margin: 5%;
+    padding: 3%;
+    background-color: white;
+    border-radius: 5px;
+}
+
+.btn-box {
+    display: flex;
+    justify-content: space-around;
+    width: 50%;
+}
+
+.image-content {
+    max-width: 40%;
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+}
+.plant-image {
+    border-radius: 50%;
+    max-width: 100%;
+    align-self: center;
+}
+
+.btn-large {
+    margin-right: 5%
+}

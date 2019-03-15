@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import { Route, NavLink, withRouter, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import 'materialize-css/dist/css/materialize.min.css';
+import './App.css';
+import "materialize-css/dist/css/materialize.min.css";
+
 
 import ProtectedRoute from './components/ProtectedRoute';
 
