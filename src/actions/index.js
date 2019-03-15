@@ -1,8 +1,22 @@
 import axios from 'axios';
+import moment from 'moment';
 
-export { REQUEST_IN_PROGRESS, LOGIN_SUCCESS, login } from './loginActions';
-export { SIGN_UP_SUCCESS, createUser } from './signUpActions';
-export { PLANT_REQUEST_SUCCESS, getPlantList } from './listActions';
+export {
+  LOGIN_IN_PROGRESS,
+  LOGIN_SUCCESS,
+  LOGIN_FAILURE,
+  login,
+} from './loginActions';
+export {
+  SIGNUP_IN_PROGRESS,
+  SIGN_UP_SUCCESS,
+  createUser,
+} from './signUpActions';
+export {
+  REQUEST_IN_PROGRESS,
+  PLANT_REQUEST_SUCCESS,
+  getPlantList,
+} from './listActions';
 export { handleUpdate, updatePlant, cancelUpdate } from './updateActions';
 export { deletePlant } from './deleteActions';
 export { getPlant } from './plantActions';
@@ -17,21 +31,31 @@ export const addPlant = newPlant => dispatch => {
   return axios
     .post('https://api-watermyplants.herokuapp.com/api/plants', newPlant)
     .then(res => {
-      console.log("HERE!!!", res.data);
+      console.log('HERE!!!', res.data);
       dispatch({
         type: ADD_PLANT_SUCCESS,
         payload: res.data,
       });
+      const notifications = createNotifications(
+        newPlant.startDate,
+        newPlant.interval
+      );
+      console.log(notifications);
+      const bulkNotifications = notifications.map(notification => ({
+        userId: Number(newPlant.userId),
+        plantId: Number(res.data[0].id),
+        smsDelivered: false,
+        notificationTime: moment(Number(notification)).format(
+          'YYYY-MM-DD hh:mm a'
+        ),
+      }));
 
       axios
-        .post('https://api-watermyplants.herokuapp.com/api/notifications', {
-          notificationTime: newPlant.startDate,
-          userId: Number(newPlant.userId),
-          plantId: Number(res.data[0].id),
-          smsDelivered: false,
-        })
+        .post(
+          'https://api-watermyplants.herokuapp.com/api/notifications',
+          bulkNotifications
+        )
         .then(notification => console.log(notification));
-
     })
     .catch(err => {
       dispatch({
@@ -41,4 +65,12 @@ export const addPlant = newPlant => dispatch => {
     });
 };
 
-
+function createNotifications(startDate, interval) {
+  const notifications = [];
+  for (let i = 0; i < 10; i++) {
+    notifications.push(
+      (Number(JSON.stringify(startDate)) + 86400000 * interval * i).toString()
+    );
+  }
+  return notifications;
+}

@@ -1,12 +1,12 @@
-import { REQUEST_IN_PROGRESS } from "./index";
 import axios from "axios";
 
+export const SIGNUP_IN_PROGRESS = 'SIGNUP_IN_PROGRESS'
 export const SIGN_UP_SUCCESS = "SIGN_UP_SUCCESS";
 
 export const createUser = userInfo => dispatch => {
   console.log(userInfo);
   dispatch({
-    type: REQUEST_IN_PROGRESS
+    type: SIGNUP_IN_PROGRESS
   });
   return axios
     .post("https://api-watermyplants.herokuapp.com/auth/register", userInfo)

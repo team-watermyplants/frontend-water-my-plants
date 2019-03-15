@@ -6,6 +6,7 @@ import {
   deletePlant,
   getPlantList
 } from "../../actions";
+import axios from "axios";
 
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -13,17 +14,31 @@ import './Plant.css';
 
 class Plant extends React.Component {
   state = {
-    plant: null,
+    notifications: [],
+    plant: null
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
     console.log(id);
-    this.props.getPlant(id).then(res => {
-      console.log(res);
-      this.setState({
-        plant: res.payload.data[0],
+    this.props
+      .getPlant(id)
+      .then(res => {
+        console.log(res);
+        this.setState({
+          plant: res.payload.data[0]
+        });
+      })
+      .then(() => {
+        axios
+          .get(
+            `https://api-watermyplants.herokuapp.com/api/plants/${id}/notifications`
+          )
+          .then(res => {
+            this.setState({
+              notifications: res.data
+            });
+          });
       });
-    });
   };
 
   handleUpdate = (e, plant) => {
@@ -73,10 +88,21 @@ class Plant extends React.Component {
             </div>
           </div>
         </div>
-          <h4></h4>
-          <h4></h4>
-          
+      </div>   
             <img className='z-depth-2' src={this.state.plant.plantURL} />
+
+        <div>
+          <ul>
+            {this.state.notifications.map(notification => {
+              return (
+                <li>
+                  <div>
+                    <p>{JSON.stringify(notification)}</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
         </div>
       );
     }
@@ -85,7 +111,7 @@ class Plant extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants,
+    plants: state.listReducer.plants
   };
 };
 

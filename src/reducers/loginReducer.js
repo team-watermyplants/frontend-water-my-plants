@@ -1,12 +1,12 @@
-import { REQUEST_IN_PROGRESS, LOGIN_SUCCESS } from "../actions";
+import { LOGIN_IN_PROGRESS, LOGIN_SUCCESS, LOGIN_FAILURE } from "../actions";
 
 const initialState = {
-  communicating: false,
+  communicating: false
 };
 
 export const loginReducer = (state = initialState, action) => {
   switch (action.type) {
-    case REQUEST_IN_PROGRESS:
+    case LOGIN_IN_PROGRESS:
       return {
         ...state,
         communicating: true
@@ -14,7 +14,12 @@ export const loginReducer = (state = initialState, action) => {
     case LOGIN_SUCCESS:
       return {
         ...state,
-        communicating: false,
+        communicating: false
+      };
+    case LOGIN_FAILURE:
+      return {
+        ...state,
+        communicating: false
       };
     default:
       return state;
