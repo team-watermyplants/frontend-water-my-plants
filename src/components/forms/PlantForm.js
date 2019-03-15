@@ -112,12 +112,14 @@ class PlantForm extends React.Component {
     const intervalValue = this.state.selectedOption
       ? this.state.selectedOption.value
       : null;
+
     const newPlant = {
       ...this.state.plant,
       userId,
       startDate: this.state.startDate,
-      interval: intervalValue,
+      interval: Number(intervalValue),
     };
+    console.log('\n newPlant', newPlant);
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
           this.props.history.push('/');
@@ -137,8 +139,9 @@ class PlantForm extends React.Component {
   };
 
   handleDateChange = date => {
+    console.log('\ndate', Date.parse(date));
     this.setState({
-      startDate: date,
+      startDate: Date.parse(date),
     });
   };
 
