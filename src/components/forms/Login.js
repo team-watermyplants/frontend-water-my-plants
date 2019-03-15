@@ -61,7 +61,7 @@ class Login extends React.Component {
           marginTop: '200px',
         }}
       >
-        <ReactLoader type="cylon" color="red" height={50} width={50} />
+        <ReactLoader type="cylon" color="#00796B" height={50} width={50} />
       </div>
     ) : (
       <MuiThemeProvider>
