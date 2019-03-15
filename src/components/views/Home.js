@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { getPlantList, handleUpdate, deletePlant } from "../../actions";
 
+import './Home.css'
+
 class Home extends React.Component {
   componentDidMount = () => {
     const userId = localStorage.getItem("userId");
@@ -33,25 +35,39 @@ class Home extends React.Component {
   render() {
     console.log(this.props.plants);
     return this.props.plants.length > 0 ? (
-      <div>
-        <ul>
+      <div className='container'>
+        
           {this.props.plants.map(plant => {
             return (
-              <li key={plant.id}>
-                <div>
-                  <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
-                  <img src={plant.plantURL} />
-                  <button onClick={e => this.handleUpdate(e, plant)}>
-                    update
-                  </button>
-                  <button onClick={e => this.handleDelete(e, plant.id)}>
-                    delete
-                  </button>
+              
+
+              <div class="card small" key={plant.id}>
+                <div class="card-image waves-effect waves-block waves-light">
+                  <img class="activator" src={plant.plantURL}></img>
                 </div>
-              </li>
+                <div class="card-content">
+                  <span class="card-title activator grey-text text-darken-4">{plant.name}
+                  <i class="material-icons right">open_bio</i></span>
+                  <p><Link to={`/plant/${plant.id}`}>Go to plant page</Link></p>
+                </div>
+                <div class="card-reveal">
+                  <span class="card-title grey-text text-darken-4">{plant.name}
+                  <i class="material-icons right">close</i></span>
+                  <p className='flow-text text'>{plant.description}</p>
+                  <div className='btn-home'>
+                    <button className='btn-large teal darken-2' onClick={e => this.handleUpdate(e, plant)}>
+                      update
+                    </button>
+                    <button className='btn-large teal darken-2' onClick={e => this.handleDelete(e, plant.id)}>
+                      delete
+                    </button>
+                  </div>
+                </div>
+              </div>
+    
+
             );
           })}
-        </ul>
       </div>
     ) : (
       <p>no plants here</p>

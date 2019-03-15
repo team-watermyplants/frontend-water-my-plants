@@ -1,0 +1,15 @@
+.card-reveal {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end
+}
+
+.btn-home {
+    width: 100%;
+    padding-top: 10%;
+    
+}
+
+.text {
+    padding-top: 5%;
+}
