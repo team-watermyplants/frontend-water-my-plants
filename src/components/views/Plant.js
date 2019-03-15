@@ -67,6 +67,7 @@ class Plant extends React.Component {
       );
     } else {
       return (
+        <>
         <div className='plant-container'>
           <h1 className='plant-name'>{this.state.plant.name}</h1>
 
@@ -89,7 +90,7 @@ class Plant extends React.Component {
           </div>
         </div>
       </div>   
-            <img className='z-depth-2' src={this.state.plant.plantURL} />
+      <img className='z-depth-2' src={this.state.plant.plantURL} />
 
         <div>
           <ul>
@@ -104,6 +105,7 @@ class Plant extends React.Component {
             })}
           </ul>
         </div>
+        </>
       );
     }
   }
