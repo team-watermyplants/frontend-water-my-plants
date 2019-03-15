@@ -39,6 +39,7 @@ class Home extends React.Component {
             return (
               <li key={plant.id}>
                 <div>
+                  <i class="fas fa-seedling" />
                   <Link to={`/plant/${plant.id}`}>{plant.name}</Link>
                   <img src={plant.plantURL} />
                   <button onClick={e => this.handleUpdate(e, plant)}>
