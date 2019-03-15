@@ -189,13 +189,31 @@ class PlantForm extends React.Component {
               <div />
             ) : (
               <WaterSchedule>
-                <div className="input-field">
+                <div
+                  className="input-field"
+                  style={{
+                    width: '200px',
+                    position: 'relative',
+                    bottom: '8px',
+                  }}
+                >
+                  <div
+                    style={{
+                      color: '#9e9e9e',
+                      fontSize: '.8rem',
+                      position: 'relative',
+                      top: '20px',
+                      left: '5px',
+                      zIndex: '100',
+                    }}
+                  >
+                    select watering schedule
+                  </div>
                   <Select
                     value={this.state.selectedOption}
                     onChange={this.handleSelectChange}
                     options={options}
                   />
-                  <label>select watering option</label>
                 </div>
 
                 <div class="input-field">
