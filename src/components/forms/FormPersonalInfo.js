@@ -1,16 +1,17 @@
-import React, { Component } from "react";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
+import React, { Component } from 'react';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
 
 export class FormPersonalInfo extends Component {
   render() {
     return (
       <MuiThemeProvider>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form style={{ marginTop: 60 }}>
             <h1>Sign Up</h1>
             <TextField
+              autoFocus
               onChange={this.props.handleChanges}
               type="text"
               name="firstName"

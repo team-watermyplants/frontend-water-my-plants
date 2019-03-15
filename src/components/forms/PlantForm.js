@@ -14,6 +14,7 @@ import { addPlant, updatePlant, cancelUpdate } from '../../actions';
 
 import ImageResults from '../ImageResults';
 
+
 class PlantForm extends React.Component {
   constructor(props) {
     super(props);
@@ -30,6 +31,7 @@ class PlantForm extends React.Component {
       amount: 5,
       images: [],
       startDate: Date.now()
+
     };
   }
 
@@ -46,7 +48,6 @@ class PlantForm extends React.Component {
   searchChangeHandler = e => {
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
-
       val === ''
         ? this.setState({ images: [] })
         : axios
@@ -124,6 +125,7 @@ class PlantForm extends React.Component {
         description: "",
         plantURL: "",
       }
+ 
     });
   };
 
@@ -236,6 +238,7 @@ class PlantForm extends React.Component {
               className='btn-large teal darken-2' 
               onClick={this.handleUpdateCancel}>
               cancel
+
             </button>
           ) : (
             <div />

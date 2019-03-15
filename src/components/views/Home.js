@@ -1,20 +1,22 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { getPlantList, handleUpdate, deletePlant } from "../../actions";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { getPlantList, handleUpdate, deletePlant } from '../../actions';
+import defaultImage from '../../images/defaultImage.jpg';
+import './Home.css';
 
 import './Home.css'
 
 class Home extends React.Component {
   componentDidMount = () => {
-    const userId = localStorage.getItem("userId");
+    const userId = localStorage.getItem('userId');
     this.props.getPlantList(userId);
   };
 
   handleUpdate = (e, plant) => {
     e.preventDefault();
     this.props.handleUpdate(plant);
-    this.props.history.push("/add-plant");
+    this.props.history.push('/add-plant');
   };
 
   handleDelete = (e, id) => {
@@ -22,13 +24,13 @@ class Home extends React.Component {
     this.props
       .deletePlant(id)
       .then(() => {
-        const userId = localStorage.getItem("userId");
+        const userId = localStorage.getItem('userId');
         this.props.getPlantList(userId).then(() => {
-          this.props.history.push("/");
+          this.props.history.push('/');
         });
       })
       .catch(() => {
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
   };
 
@@ -79,7 +81,7 @@ class Home extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    plants: state.listReducer.plants
+    plants: state.listReducer.plants,
   };
 };
 

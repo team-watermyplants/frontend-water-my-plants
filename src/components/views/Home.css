@@ -13,3 +13,52 @@
 .text {
     padding-top: 5%;
 }
+
+.home--container {
+  width: 100%;
+}
+
+.home--grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.home--gridTile {
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 250px;
+  width: 250px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 25px;
+  borde-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+}
+
+.home--plantName {
+  color: #ffffff;
+  text-shadow: 3px 5px 2px #474747;
+  text-transform: uppercase;
+  text-align: center;
+  overflow: hidden;
+  margin: 30px 10px 0;
+}
+
+.home--tileMenu {
+  margin-bottom: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.home--button {
+  background-color: transparent;
+  color: white;
+  padding: 5px 10px;
+  font-weight: bold;
+  border-radius: 4px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.8);
+  background-color: #00796b;
+}

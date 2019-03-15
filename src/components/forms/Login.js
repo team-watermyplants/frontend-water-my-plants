@@ -1,24 +1,24 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import { connect } from "react-redux";
-import { login } from "../../actions";
-import MuiThemeProvider from "material-ui/styles/MuiThemeProvider";
-import TextField from "material-ui/TextField";
-import RaisedButton from "material-ui/RaisedButton";
-import ReactLoader from "react-loading";
-import Snackbar from "material-ui/Snackbar";
-import IconButton from "material-ui/IconButton";
-import Button from "material-ui/FlatButton";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { login } from '../../actions';
+import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import ReactLoader from 'react-loading';
+// import Snackbar from "material-ui/Snackbar";
+// import IconButton from "material-ui/IconButton";
+// import Button from "material-ui/FlatButton";
 
 class Login extends React.Component {
   state = {
     credentials: {
-      username: "",
-      password: ""
+      username: '',
+      password: '',
     },
     loading: false,
     error: false,
-    open: true
+    open: true,
   };
 
   handleChanges = e => {
@@ -26,26 +26,26 @@ class Login extends React.Component {
     this.setState({
       credentials: {
         ...this.state.credentials,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    console.log("login handler");
+    console.log('login handler');
     this.props
       .login({
         username: this.state.credentials.username,
-        password: this.state.credentials.password
+        password: this.state.credentials.password,
       })
       .then(() => {
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
   };
 
   handleClose = (event, reason) => {
-    if (reason === "clickaway") {
+    if (reason === 'clickaway') {
       return;
     }
 
@@ -56,16 +56,16 @@ class Login extends React.Component {
     return this.props.communicating ? (
       <div
         style={{
-          display: "flex",
-          justifyContent: "center",
-          marginTop: "200px"
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '200px',
         }}
       >
-        <ReactLoader type="cylon" color="red" height={50} width={50} />
+        <ReactLoader type="cylon" color="#00796B" height={50} width={50} />
       </div>
     ) : (
       <MuiThemeProvider>
-        <div style={{ display: "flex", justifyContent: "center" }}>
+        <div style={{ display: 'flex', justifyContent: 'center' }}>
           <form style={{ marginTop: 60 }} onSubmit={this.handleSubmit}>
             <h1>Log In</h1>
             <TextField
@@ -102,7 +102,7 @@ class Login extends React.Component {
           </form>
         </div>
 
-        <Snackbar
+        {/* <Snackbar
           anchorOrigin={{
             vertical: "bottom",
             horizontal: "left"
@@ -132,7 +132,7 @@ class Login extends React.Component {
               x
             </IconButton>
           ]}
-        />
+        /> */}
       </MuiThemeProvider>
     );
   }
@@ -140,13 +140,13 @@ class Login extends React.Component {
 
 const styles = {
   button: {
-    margin: 15
-  }
+    margin: 15,
+  },
 };
 
 const mapStateToProps = state => {
   return {
-    communicating: state.loginReducer.communicating
+    communicating: state.loginReducer.communicating,
   };
 };
 
