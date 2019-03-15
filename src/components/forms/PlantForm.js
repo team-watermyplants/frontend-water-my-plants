@@ -1,18 +1,18 @@
-import React from "react";
-import { connect } from "react-redux";
-import axios from "axios";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
-import styled from "styled-components";
-import M from "materialize-css";
-import Select from "react-select";
-import { addPlant, updatePlant, cancelUpdate } from "../../actions";
-import ImageResults from "../ImageResults";
+import React from 'react';
+import { connect } from 'react-redux';
+import axios from 'axios';
+import DatePicker from 'react-datepicker';
+import 'react-datepicker/dist/react-datepicker.css';
+import styled from 'styled-components';
+import M from 'materialize-css';
+import Select from 'react-select';
+import { addPlant, updatePlant, cancelUpdate } from '../../actions';
+import ImageResults from '../ImageResults';
 
 const options = [
-  { value: 1, label: "every day" },
-  { value: 2, label: "every other day" },
-  { value: 7, label: "once a week" }
+  { value: 1, label: 'every day' },
+  { value: 2, label: 'every other day' },
+  { value: 7, label: 'once a week' },
 ];
 
 class PlantForm extends React.Component {
@@ -20,26 +20,26 @@ class PlantForm extends React.Component {
     super(props);
     this.state = {
       plant: {
-        name: "",
-        description: "",
-        location: "",
-        plantURL: ""
+        name: '',
+        description: '',
+        location: '',
+        plantURL: '',
       },
-      searchPlant: "",
-      apiUrl: "https://api.unsplash.com/search/photos",
+      searchPlant: '',
+      apiUrl: 'https://api.unsplash.com/search/photos',
       apiKey:
-        "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
+        '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 1,
       images: [],
       startDate: Date.now(),
-      selectedOption: null
+      selectedOption: null,
     };
   }
 
   componentDidMount = () => {
     if (this.props.activePlant) {
       this.setState({
-        plant: this.props.activePlant
+        plant: this.props.activePlant,
       });
     }
     //Materialize select menu
@@ -49,7 +49,7 @@ class PlantForm extends React.Component {
   searchChangeHandler = e => {
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
-      val === ""
+      val === ''
         ? this.setState({ images: [] })
         : axios
             .get(
@@ -70,8 +70,8 @@ class PlantForm extends React.Component {
     this.setState({
       plant: {
         ...this.state.plant,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -84,74 +84,75 @@ class PlantForm extends React.Component {
     e.preventDefault();
     this.setState({
       images: [],
-      searchPlant: "Great Choice!",
-      plant: { ...this.state.plant, plantURL: img }
+      searchPlant: 'Great Choice!',
+      plant: { ...this.state.plant, plantURL: img },
     });
   };
 
   handleUpdateCancel = () => {
     this.setState({
       plant: {
-        name: "",
-        description: "",
-        location: "",
-        plantURL: ""
+        name: '',
+        description: '',
+        location: '',
+        plantURL: '',
       },
-      searchPlant: "",
-      apiUrl: "https://api.unsplash.com/search/photos",
+      searchPlant: '',
+      apiUrl: 'https://api.unsplash.com/search/photos',
       apiKey:
-        "48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b",
+        '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 1,
-      images: []
+      images: [],
     });
 
     this.props.cancelUpdate();
-    this.props.history.push("/");
+    this.props.history.push('/');
   };
 
   handleSubmit = e => {
     e.preventDefault();
-    const userId = localStorage.getItem("userId");
-    const interval = document.getElementById("interval");
+    const userId = localStorage.getItem('userId');
+    const interval = document.getElementById('interval');
     console.log(interval);
-    // const notificationArr = this.state.startDate => {
-    //   const amount = 10;
-    // }
     const newPlant = {
       ...this.state.plant,
       userId,
       startDate: this.state.startDate,
-      interval: this.state.selectedOption.value
+      interval: this.state.selectedOption.value,
     };
     this.props.activePlant
       ? this.props.updatePlant(this.props.activePlant.id, newPlant).then(() => {
-          this.props.history.push("/");
+          this.props.history.push('/');
         })
       : this.props.addPlant(newPlant).then(() => {
-          this.props.history.push("/");
+          this.props.history.push('/');
         });
     this.setState({
       plant: {
-        name: "",
-        searchPlant: "",
-        location: "",
-        description: "",
-        plantURL: ""
-      }
+        name: '',
+        searchPlant: '',
+        location: '',
+        description: '',
+        plantURL: '',
+      },
     });
   };
 
   handleDateChange = date => {
     this.setState({
-      startDate: date
+      startDate: date,
     });
   };
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper
+        style={{
+          height: '50vh',
+        }}
+      >
         <Container>
-          <H1>{this.props.activePlant ? "update plant" : "add plant"}</H1>
+          <H1>{this.props.activePlant ? 'update plant' : 'add plant'}</H1>
           <form onSubmit={this.handleSubmit}>
             <div className="input-field">
               <label>plant name</label>
@@ -183,31 +184,34 @@ class PlantForm extends React.Component {
               />
             </div>
 
-            <WaterSchedule>
-              <div className="input-field">
-                <Select
-                  style={{ width: "550px" }}
-                  value={this.state.selectedOption}
-                  onChange={this.handleSelectChange}
-                  options={options}
-                />
-                <label>select watering option</label>
-              </div>
-
-              <div class="input-field">
-                <WaterDateTime>
-                  <label>select start date</label>
-                  <DatePicker
-                    selected={this.state.startDate}
-                    onChange={this.handleDateChange}
-                    showTimeSelect
-                    timeIntervals={5}
-                    dateFormat="MMM d, yyyy h:mm aa"
-                    withPortal
+            {this.props.activePlant ? (
+              <div />
+            ) : (
+              <WaterSchedule>
+                <div className="input-field">
+                  <Select
+                    value={this.state.selectedOption}
+                    onChange={this.handleSelectChange}
+                    options={options}
                   />
-                </WaterDateTime>
-              </div>
-            </WaterSchedule>
+                  <label>select watering option</label>
+                </div>
+
+                <div class="input-field">
+                  <WaterDateTime>
+                    <label>select start date</label>
+                    <DatePicker
+                      selected={this.state.startDate}
+                      onChange={this.handleDateChange}
+                      showTimeSelect
+                      timeIntervals={5}
+                      dateFormat="MMM d, yyyy h:mm aa"
+                      withPortal
+                    />
+                  </WaterDateTime>
+                </div>
+              </WaterSchedule>
+            )}
 
             <div class="input-field">
               <input
@@ -232,7 +236,7 @@ class PlantForm extends React.Component {
               className="btn waves-effect btn-large teal darken-2"
               onClick={this.handleSubmit}
             >
-              {this.props.activePlant ? "update plant" : "add plant"}
+              {this.props.activePlant ? 'update plant' : 'add plant'}
             </button>
 
             {this.props.activePlant ? (
@@ -254,7 +258,7 @@ class PlantForm extends React.Component {
 
 const mapStateToProps = state => ({
   addingPlant: state.addingPlant,
-  activePlant: state.updateReducer.activePlant
+  activePlant: state.updateReducer.activePlant,
 });
 
 export default connect(

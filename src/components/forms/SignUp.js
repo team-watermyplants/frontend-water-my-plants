@@ -1,20 +1,20 @@
-import React from "react";
-import { connect } from "react-redux";
-import { createUser } from "../../actions";
-import FormUserInfo from "./FormUserInfo";
-import FormPersonalInfo from "./FormPersonalInfo";
+import React from 'react';
+import { connect } from 'react-redux';
+import { createUser } from '../../actions';
+import FormUserInfo from './FormUserInfo';
+import FormPersonalInfo from './FormPersonalInfo';
 
 class SignUp extends React.Component {
   state = {
     NewUserInfo: {
-      firstName: "",
-      lastName: "",
-      username: "",
-      password: "",
-      confirmPassword: "",
-      phoneNumber: ""
+      firstName: '',
+      lastName: '',
+      username: '',
+      password: '',
+      confirmPassword: '',
+      phoneNumber: '',
     },
-    step: 1
+    step: 1,
   };
 
   handleChanges = e => {
@@ -22,8 +22,8 @@ class SignUp extends React.Component {
     this.setState({
       NewUserInfo: {
         ...this.state.NewUserInfo,
-        [e.target.name]: e.target.value
-      }
+        [e.target.name]: e.target.value,
+      },
     });
   };
 
@@ -31,7 +31,7 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { step } = this.state;
     this.setState({
-      step: step + 1
+      step: step + 1,
     });
   };
 
@@ -39,35 +39,35 @@ class SignUp extends React.Component {
     e.preventDefault();
     const { step } = this.state;
     this.setState({
-      step: step - 1
+      step: step - 1,
     });
   };
 
   handleSubmit = e => {
     e.preventDefault();
     if (
-      this.state.NewUserInfo.firstName !== "" &&
-      this.state.NewUserInfo.lastName !== "" &&
-      this.state.NewUserInfo.username !== "" &&
-      this.state.NewUserInfo.password !== "" &&
-      this.state.NewUserInfo.confirmPassword !== "" &&
-      this.state.NewUserInfo.phoneNumber !== "" &&
+      this.state.NewUserInfo.firstName !== '' &&
+      this.state.NewUserInfo.lastName !== '' &&
+      this.state.NewUserInfo.username !== '' &&
+      this.state.NewUserInfo.password !== '' &&
+      this.state.NewUserInfo.confirmPassword !== '' &&
+      this.state.NewUserInfo.phoneNumber !== '' &&
       this.state.NewUserInfo.password == this.state.NewUserInfo.confirmPassword
     ) {
       console.log(this.state.NewUserInfo);
       this.props.createUser(this.state.NewUserInfo).then(() => {
-        this.props.history.push("/");
+        this.props.history.push('/');
       });
     }
     this.setState({
       NewUserInfo: {
-        firstName: "",
-        lastName: "",
-        username: "",
-        password: "",
-        confirmPassword: "",
-        phoneNumber: ""
-      }
+        firstName: '',
+        lastName: '',
+        username: '',
+        password: '',
+        confirmPassword: '',
+        phoneNumber: '',
+      },
     });
   };
 
@@ -109,7 +109,7 @@ class SignUp extends React.Component {
 
 const mapStateToProps = state => {
   return {
-    communicating: state.signUpReducer.communicating
+    communicating: state.signUpReducer.communicating,
   };
 };
 
