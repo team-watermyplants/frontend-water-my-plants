@@ -69,14 +69,31 @@ class Plant extends React.Component {
       return (
         <>
         <div className='plant-container'>
-          <h1 className='plant-name'>{this.state.plant.name}</h1>
-
           <div class="row">
           <div class="col s12 m6">
-            <div class="card teal lighten-1">
+            <div class="card teal lighten-3">
+            <div className='top-card'>
               <div class="card-content white-text">
-                <span class="card-title">location: {this.state.plant.location}</span>
+                <h1 className='plant-name'>{this.state.plant.name}</h1>
+                <span class="card-title">location: <strong>{this.state.plant.location}</strong></span>
                 <p>description: {this.state.plant.description}</p>
+              </div>
+              <div className='image-content'>
+              <img className='plant-image z-depth-2' src={this.state.plant.plantURL} />
+              </div>
+              </div>
+              <div className='notif-box z-depth-2'>
+                <ul>
+                  {this.state.notifications.map(notification => {
+                    return (
+                      <li>
+                        <div>
+                          <p>{JSON.stringify(notification)}</p>
+                        </div>
+                      </li>
+                    );
+                  })}
+                </ul>
               </div>
               <div class="card-action">
                 <button className='btn-large teal darken-2' onClick={e => this.handleUpdate(e, this.state.plant)}>
@@ -89,22 +106,11 @@ class Plant extends React.Component {
             </div>
           </div>
         </div>
+        
       </div>   
-      <img className='z-depth-2' src={this.state.plant.plantURL} />
+      
 
-        <div>
-          <ul>
-            {this.state.notifications.map(notification => {
-              return (
-                <li>
-                  <div>
-                    <p>{JSON.stringify(notification)}</p>
-                  </div>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
+        
         </>
       );
     }
