@@ -114,9 +114,6 @@ class PlantForm extends React.Component {
     const userId = localStorage.getItem("userId");
     const interval = document.getElementById("interval");
     console.log(interval);
-    // const notificationArr = this.state.startDate => {
-    //   const amount = 10;
-    // }
     const newPlant = {
       ...this.state.plant,
       userId,
@@ -149,7 +146,11 @@ class PlantForm extends React.Component {
 
   render() {
     return (
-      <Wrapper>
+      <Wrapper
+        style={{
+          height: "50vh"
+        }}
+      >
         <Container>
           <H1>{this.props.activePlant ? "update plant" : "add plant"}</H1>
           <form onSubmit={this.handleSubmit}>
@@ -183,31 +184,34 @@ class PlantForm extends React.Component {
               />
             </div>
 
-            <WaterSchedule>
-              <div className="input-field">
-                <Select
-                  style={{ width: "550px" }}
-                  value={this.state.selectedOption}
-                  onChange={this.handleSelectChange}
-                  options={options}
-                />
-                <label>select watering option</label>
-              </div>
-
-              <div class="input-field">
-                <WaterDateTime>
-                  <label>select start date</label>
-                  <DatePicker
-                    selected={this.state.startDate}
-                    onChange={this.handleDateChange}
-                    showTimeSelect
-                    timeIntervals={5}
-                    dateFormat="MMM d, yyyy h:mm aa"
-                    withPortal
+            {this.props.activePlant ? (
+              <div />
+            ) : (
+              <WaterSchedule>
+                <div className="input-field">
+                  <Select
+                    value={this.state.selectedOption}
+                    onChange={this.handleSelectChange}
+                    options={options}
                   />
-                </WaterDateTime>
-              </div>
-            </WaterSchedule>
+                  <label>select watering option</label>
+                </div>
+
+                <div class="input-field">
+                  <WaterDateTime>
+                    <label>select start date</label>
+                    <DatePicker
+                      selected={this.state.startDate}
+                      onChange={this.handleDateChange}
+                      showTimeSelect
+                      timeIntervals={5}
+                      dateFormat="MMM d, yyyy h:mm aa"
+                      withPortal
+                    />
+                  </WaterDateTime>
+                </div>
+              </WaterSchedule>
+            )}
 
             <div class="input-field">
               <input

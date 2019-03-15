@@ -79,7 +79,7 @@ class Plant extends React.Component {
           <ul>
             {this.state.notifications.map(notification => {
               return (
-                <li>
+                <li key={notification.id}>
                   <div>
                     <p>{JSON.stringify(notification)}</p>
                   </div>
