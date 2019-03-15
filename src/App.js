@@ -20,24 +20,122 @@ class App extends Component {
   handleLogOut = e => {
     e.preventDefault();
     localStorage.clear();
-    this.props.history.push('/login')
+    this.props.history.push("/login");
   };
   render() {
     return (
       <MuiThemeProvider>
         <div className="App">
           {localStorage.getItem("userId") ? (
-            <AppBar title="Water My Plants">
-              <NavLink to="/">Home</NavLink>
-              <NavLink to="/add-plant">Add Plant</NavLink>
-              <button onClick={this.handleLogOut}>
+            <AppBar
+              style={{
+                alignItems: "center",
+                height: "75px",
+                background: "#00796B"
+              }}
+              title="Water My Plants"
+            >
+              <i class="fas fa-seedling" />
+              <NavLink
+                style={{
+                  color: "white",
+                  fontSize: "20px",
+                  height: "40px",
+                  padding: "10px",
+                  marginRight: "10px",
+                  border: "1px solid white",
+                  borderRadius: "2.5px"
+                }}
+                activeStyle={{
+                  color: "#00796B",
+                  background: "white"
+                }}
+                exact
+                to="/"
+              >
+                Home
+              </NavLink>
+              <NavLink
+                style={{
+                  color: "white",
+                  fontSize: "20px",
+                  height: "40px",
+                  padding: "10px",
+                  marginRight: "10px",
+                  border: "1px solid white",
+                  borderRadius: "2.5px"
+                }}
+                activeStyle={{
+                  color: "#00796B",
+                  background: "white"
+                }}
+                to="/add-plant"
+              >
+                Add Plant
+              </NavLink>
+              <div
+                style={{
+                  cursor: "pointer",
+                  background: "none",
+                  color: "white",
+                  fontSize: "20px",
+                  height: "40px",
+                  padding: "10px",
+                  marginRight: "10px",
+                  border: "1px solid white",
+                  borderRadius: "2.5px"
+                }}
+                onClick={this.handleLogOut}
+              >
                 Log Out
-              </button>
+              </div>
             </AppBar>
           ) : (
-            <AppBar title="Water My Plants">
-              <NavLink to="/login">Login</NavLink>
-              <NavLink to="/sign-up">Sign Up</NavLink>
+            <AppBar
+              style={{
+                alignItems: "center",
+                height: "75px",
+                background: "#00796B"
+              }}
+              title="Water My Plants"
+            >
+              <i class="fas fa-seedling" />
+              <NavLink
+                style={{
+                  color: "white",
+                  fontSize: "20px",
+                  height: "40px",
+                  padding: "10px",
+                  marginRight: "10px",
+                  border: "1px solid white",
+                  borderRadius: "2.5px"
+                }}
+                activeStyle={{
+                  color: "#00796B",
+                  background: "white"
+                }}
+                to="/login"
+              >
+                Login
+              </NavLink>
+              <NavLink
+                style={{
+                  color: "white",
+                  fontSize: "20px",
+                  height: "40px",
+                  padding: "10px",
+                  marginRight: "10px",
+                  border: "1px solid white",
+                  borderRadius: "2.5px"
+                }}
+                activeStyle={{
+                  color: "#00796B",
+                  background: "white"
+                }}
+                to="/sign-up"
+              >
+                Sign Up
+              </NavLink>
             </AppBar>
           )}
           <section>

@@ -218,7 +218,7 @@ class PlantForm extends React.Component {
             <div className='image-display'>
               {this.state.images.length > 0 ? (
                 <ImageResults
-
+                  className='image-card'
                   images={this.state.images}
                   selectImage={this.selectImage}/>
               ) : null}

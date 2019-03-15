@@ -39,6 +39,7 @@ class Home extends React.Component {
         
           {this.props.plants.map(plant => {
             return (
+
               
 
               <div class="card small" key={plant.id}>
@@ -49,6 +50,7 @@ class Home extends React.Component {
                   <span class="card-title activator grey-text text-darken-4">{plant.name}
                   <i class="material-icons right">open_bio</i></span>
                   <p><Link to={`/plant/${plant.id}`}>Go to plant page</Link></p>
+
                 </div>
                 <div class="card-reveal">
                   <span class="card-title grey-text text-darken-4">{plant.name}
