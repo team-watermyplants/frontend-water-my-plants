@@ -5,8 +5,6 @@ import { getPlantList, handleUpdate, deletePlant } from '../../actions';
 import defaultImage from '../../images/defaultImage.jpg';
 import './Home.css';
 
-import './Home.css'
-
 class Home extends React.Component {
   componentDidMount = () => {
     const userId = localStorage.getItem('userId');
@@ -37,41 +35,46 @@ class Home extends React.Component {
   render() {
     console.log(this.props.plants);
     return this.props.plants.length > 0 ? (
-      <div className='container'>
-        
-          {this.props.plants.map(plant => {
-            return (
-
-              
-
-              <div class="card small" key={plant.id}>
-                <div class="card-image waves-effect waves-block waves-light">
-                  <img class="activator" src={plant.plantURL}></img>
-                </div>
-                <div class="card-content">
-                  <span class="card-title activator grey-text text-darken-4">{plant.name}
-                  <i class="material-icons right">open_bio</i></span>
-                  <p><Link to={`/plant/${plant.id}`}>Go to plant page</Link></p>
-
-                </div>
-                <div class="card-reveal">
-                  <span class="card-title grey-text text-darken-4">{plant.name}
-                  <i class="material-icons right">close</i></span>
-                  <p className='flow-text text'>{plant.description}</p>
-                  <div className='btn-home'>
-                    <button className='btn-large teal darken-2' onClick={e => this.handleUpdate(e, plant)}>
-                      update
-                    </button>
-                    <button className='btn-large teal darken-2' onClick={e => this.handleDelete(e, plant.id)}>
-                      delete
-                    </button>
-                  </div>
+      <div className="container">
+        {this.props.plants.map(plant => {
+          return (
+            <div class="card small" key={plant.id}>
+              <div class="card-image waves-effect waves-block waves-light">
+                <img class="activator" src={plant.plantURL || defaultImage} />
+              </div>
+              <div class="card-content">
+                <span class="card-title activator grey-text text-darken-4">
+                  {plant.name}
+                  <i class="material-icons right">open_bio</i>
+                </span>
+                <p>
+                  <Link to={`/plant/${plant.id}`}>Go to plant page</Link>
+                </p>
+              </div>
+              <div class="card-reveal">
+                <span class="card-title grey-text text-darken-4">
+                  {plant.name}
+                  <i class="material-icons right">close</i>
+                </span>
+                <p className="flow-text text">{plant.description}</p>
+                <div className="btn-home">
+                  <button
+                    className="btn-large teal darken-2"
+                    onClick={e => this.handleUpdate(e, plant)}
+                  >
+                    update
+                  </button>
+                  <button
+                    className="btn-large teal darken-2"
+                    onClick={e => this.handleDelete(e, plant.id)}
+                  >
+                    delete
+                  </button>
                 </div>
               </div>
-    
-
-            );
-          })}
+            </div>
+          );
+        })}
       </div>
     ) : (
       <p>no plants here</p>
