@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getPlantList, handleUpdate, deletePlant } from '../../actions';
 import defaultImage from '../../images/defaultImage.jpg';
 import './Home.css';
+import 'material-design-icons/iconfont/material-icons.css';
+
 
 class Home extends React.Component {
   componentDidMount = () => {
@@ -45,7 +47,7 @@ class Home extends React.Component {
               <div class="card-content">
                 <span class="card-title activator grey-text text-darken-4">
                   {plant.name}
-                  <i class="material-icons right">open_bio</i>
+                  <i class="material-icons right">more_vert</i>
                 </span>
                 <p>
                   <Link to={`/plant/${plant.id}`}>Go to plant page</Link>

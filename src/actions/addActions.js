@@ -11,7 +11,6 @@ export const addPlant = newPlant => dispatch => {
   return axios
     .post("https://api-watermyplants.herokuapp.com/api/plants", newPlant)
     .then(res => {
-      console.log("HERE!!!", res.data);
       dispatch({
         type: ADD_PLANT_SUCCESS,
         payload: res.data
