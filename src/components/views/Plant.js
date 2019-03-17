@@ -83,15 +83,11 @@ class Plant extends React.Component {
               </div>
               </div>
               <div className='notif-box z-depth-2'>
-              <h5 className='notif-title'>Notifications:</h5>
-                <ul>
+              <h5 className='notif-title'><strong>Notifications:</strong></h5>
+                <ul className='notif-list'> 
                   {this.state.notifications.map(notification => {
                     return (
-                      <li>
-                        <div>
-                          <p>{JSON.stringify(notification)}</p>
-                        </div>
-                      </li>
+                      <li className='notif-list-item'>{JSON.stringify(notification)}</li>
                     );
                   })}
                 </ul>
