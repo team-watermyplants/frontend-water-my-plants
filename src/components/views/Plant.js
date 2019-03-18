@@ -7,6 +7,7 @@ import {
   getPlantList
 } from "../../actions";
 import axios from "axios";
+import moment from 'moment'
 
 import 'materialize-css/dist/css/materialize.min.css';
 
@@ -87,7 +88,7 @@ class Plant extends React.Component {
                 <ul className='notif-list'> 
                   {this.state.notifications.map(notification => {
                     return (
-                      <li className='notif-list-item'>{JSON.stringify(notification)}</li>
+                      <li className='notif-list-item'>Notification {moment(notification.notificationTime).fromNow()}</li>
                     );
                   })}
                 </ul>
