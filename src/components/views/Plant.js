@@ -69,13 +69,13 @@ class Plant extends React.Component {
       return (
         <>
         <div className='plant-container'>
-          <div class="row">
-          <div class="col s12 m6">
-            <div class="card teal lighten-3">
+          <div className="row">
+          <div className="col s12 m6">
+            <div className="card teal lighten-3">
             <div className='top-card'>
-              <div class="card-content white-text">
+              <div className="card-content white-text">
                 <h1 className='plant-name'>{this.state.plant.name}</h1>
-                <span class="card-title">location: <strong>{this.state.plant.location}</strong></span>
+                <span className="card-title">location: <strong>{this.state.plant.location}</strong></span>
                 <p>description: {this.state.plant.description}</p>
               </div>
               <div className='image-content'>
@@ -92,7 +92,7 @@ class Plant extends React.Component {
                   })}
                 </ul>
               </div>
-              <div class="card-action">
+              <div className="card-action">
                 <button className='btn-large teal darken-2' onClick={e => this.handleUpdate(e, this.state.plant)}>
               update
             </button>

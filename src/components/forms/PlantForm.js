@@ -2,16 +2,17 @@ import React from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import DatePicker from 'react-datepicker';
-import 'react-datepicker/dist/react-datepicker.css';
 import styled from 'styled-components';
 import M from 'materialize-css';
-import 'materialize-css/dist/css/materialize.min.css';
 import Select from 'react-select';
-import './PlantForm.css';
-
-import { addPlant, updatePlant, cancelUpdate } from '../../actions';
 
 import ImageResults from '../ImageResults';
+import { addPlant, updatePlant, cancelUpdate } from '../../actions';
+
+import 'materialize-css/dist/css/materialize.min.css';
+import 'react-datepicker/dist/react-datepicker.css';
+import './PlantForm.css';
+
 const options = [
   { value: 1, label: 'every day' },
   { value: 2, label: 'every other day' },
@@ -33,7 +34,7 @@ class PlantForm extends React.Component {
         '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 5,
       images: [],
-      startDate: Date.now(),
+      startDate: new Date(),
       selectedOption: null,
     };
   }
@@ -139,9 +140,8 @@ class PlantForm extends React.Component {
   };
 
   handleDateChange = date => {
-    console.log('\ndate', Date.parse(date));
     this.setState({
-      startDate: Date.parse(date),
+      startDate: new Date(date),
     });
   };
 
@@ -176,7 +176,7 @@ class PlantForm extends React.Component {
               />
             </div>
 
-            <div class="input-field">
+            <div className="input-field">
               <label>description</label>
               <textarea
                 className="materialize-textarea"
@@ -214,7 +214,7 @@ class PlantForm extends React.Component {
                 />
               </div>
 
-              <div class="input-field">
+              <div className="input-field">
                 <WaterDateTime>
                   <label>select start date</label>
                   <DatePicker
@@ -229,7 +229,7 @@ class PlantForm extends React.Component {
               </div>
             </WaterSchedule>
 
-            <div class="input-field">
+            <div className="input-field">
               <input
                 type="text"
                 name="searchPlant"

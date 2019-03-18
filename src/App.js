@@ -40,7 +40,7 @@ class App extends Component {
             >
               <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <i
-                  class="fas fa-seedling fa-3x"
+                  className="fas fa-seedling fa-3x"
                   style={{ margin: '10px 15px 0px' }}
                 />
               </Link>
@@ -84,7 +84,7 @@ class App extends Component {
             >
               <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
                 <i
-                  class="fas fa-seedling fa-3x"
+                  className="fas fa-seedling fa-3x"
                   style={{ margin: '10px 15px 0px' }}
                 />
               </Link>

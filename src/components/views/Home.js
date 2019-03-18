@@ -40,23 +40,23 @@ class Home extends React.Component {
       <div className="container">
         {this.props.plants.map(plant => {
           return (
-            <div class="card small" key={plant.id}>
-              <div class="card-image waves-effect waves-block waves-light">
-                <img class="activator" src={plant.plantURL || defaultImage} />
+            <div className="card small" key={plant.id}>
+              <div className="card-image waves-effect waves-block waves-light">
+                <img className="activator" src={plant.plantURL || defaultImage} />
               </div>
-              <div class="card-content">
-                <span class="card-title activator grey-text text-darken-4">
+              <div className="card-content">
+                <span className="card-title activator grey-text text-darken-4">
                   {plant.name}
-                  <i class="material-icons right">more_vert</i>
+                  <i className="material-icons right">more_vert</i>
                 </span>
                 <p>
                   <Link to={`/plant/${plant.id}`}>Go to plant page</Link>
                 </p>
               </div>
-              <div class="card-reveal">
-                <span class="card-title grey-text text-darken-4">
+              <div className="card-reveal">
+                <span className="card-title grey-text text-darken-4">
                   {plant.name}
-                  <i class="material-icons right">close</i>
+                  <i className="material-icons right">close</i>
                 </span>
                 <p className="flow-text text">{plant.description}</p>
                 <div className="btn-home">
