@@ -95,6 +95,13 @@ class Login extends React.Component {
               primary={true}
               style={styles.button}
             />
+            <RaisedButton
+              label='Login with GitHub'
+              secondary
+              onClick={() => (
+                window.location.href = `${process.env.REACT_APP_SERVER_URL}/auth/github`)
+                }
+            />
             <br />
             <p>
               Don't Have an Account? Sign up <Link to="/sign-up">Here!</Link>
