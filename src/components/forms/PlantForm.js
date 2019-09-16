@@ -30,8 +30,6 @@ class PlantForm extends React.Component {
       },
       searchPlant: '',
       apiUrl: 'https://api.unsplash.com/search/photos',
-      apiKey:
-        '48117950a0275f34c51b3ddc13c4aa1606f1f38218226bfa626297fe80c98d6b',
       amount: 5,
       images: [],
       startDate: new Date(),
@@ -50,6 +48,7 @@ class PlantForm extends React.Component {
   };
 
   searchChangeHandler = e => {
+    const apiKey = process.env.REACT_APP_IMAGE_API_KEY
     let val = e.target.value;
     this.setState({ [e.target.name]: val }, () => {
       val === ''
@@ -57,7 +56,7 @@ class PlantForm extends React.Component {
         : axios
             .get(
               `${this.state.apiUrl}/?client_id=${
-                this.state.apiKey
+                apiKey
               }&query=plant,${this.state.searchPlant}&per_page=${
                 this.state.amount
               }`
