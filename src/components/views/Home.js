@@ -42,7 +42,7 @@ class Home extends React.Component {
           return (
             <div className="card small" key={plant.id}>
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={plant.plantURL || defaultImage} />
+                <img className="activator" src={plant.plantURL || defaultImage} alt={plant.description}/>
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">

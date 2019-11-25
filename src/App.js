@@ -14,7 +14,7 @@ import SignUp from './components/forms/SignUp';
 import Home from './components/views/Home';
 import Plant from './components/views/Plant';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
-import AppBar from 'material-ui/AppBar';
+// import AppBar from 'material-ui/AppBar';
 import './App.css';
 
 class App extends Component {
