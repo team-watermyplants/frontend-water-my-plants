@@ -108,16 +108,17 @@ class SignUp extends React.Component {
                 phoneNumber={this.state.NewUserInfo.phoneNumber}
               />
             );
-            default: 
+            default:
               return (
                 <div>
-                  <p>unable to process</p>
+                  <p>Invalid request</p>
                 </div>
-              )
+              );
+            
+          }
         }
     }
   }
-}
 
 const mapStateToProps = state => {
   return {

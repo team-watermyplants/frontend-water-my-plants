@@ -35,7 +35,7 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.plants);
+    // console.log(this.props.plants);
     return this.props.plants.length > 0 ? (
       <div className="container">
         {this.props.plants.map(plant => {
