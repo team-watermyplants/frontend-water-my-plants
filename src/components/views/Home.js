@@ -35,14 +35,14 @@ class Home extends React.Component {
   };
 
   render() {
-    console.log(this.props.plants);
+    // console.log(this.props.plants);
     return this.props.plants.length > 0 ? (
       <div className="container">
         {this.props.plants.map(plant => {
           return (
             <div className="card small" key={plant.id}>
               <div className="card-image waves-effect waves-block waves-light">
-                <img className="activator" src={plant.plantURL || defaultImage} />
+                <img className="activator" src={plant.plantURL || defaultImage} alt={plant.description}/>
               </div>
               <div className="card-content">
                 <span className="card-title activator grey-text text-darken-4">
