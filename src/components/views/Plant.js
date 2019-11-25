@@ -80,7 +80,7 @@ class Plant extends React.Component {
                 <p>description: {this.state.plant.description}</p>
               </div>
               <div className='image-content'>
-              <img className='plant-image z-depth-2' src={this.state.plant.plantURL} alt={this.state.plant.alt}/>
+              <img className='plant-image z-depth-2' src={this.state.plant.plantURL} alt={this.state.plant.description} />
               </div>
               </div>
               <div className='notif-box z-depth-2'>

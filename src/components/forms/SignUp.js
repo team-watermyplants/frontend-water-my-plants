@@ -80,11 +80,11 @@ class SignUp extends React.Component {
           </div>
         );
         default:
-            return (
-              <div>
-                <p>loading...</p>
-              </div>
-            );
+          return (
+            <dib>
+              <p>loading...</p>
+            </dib>
+          )
       case false:
         switch (this.state.step) {
           case 1:
