@@ -8,7 +8,6 @@ const ImageResults = props => {
                     <>
                     {props.images.map(img => 
                         <ImageCard
-
                             key={img.id}
                             src={img.urls.small} 
                             alt={img.alt_description} 

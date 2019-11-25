@@ -52,7 +52,7 @@ class SignUp extends React.Component {
       this.state.NewUserInfo.password !== '' &&
       this.state.NewUserInfo.confirmPassword !== '' &&
       this.state.NewUserInfo.phoneNumber !== '' &&
-      this.state.NewUserInfo.password == this.state.NewUserInfo.confirmPassword
+      this.state.NewUserInfo.password === this.state.NewUserInfo.confirmPassword
     ) {
       console.log(this.state.NewUserInfo);
       this.props.createUser(this.state.NewUserInfo).then(() => {
@@ -79,6 +79,12 @@ class SignUp extends React.Component {
             <p>loading...</p>
           </div>
         );
+        default:
+            return (
+              <div>
+                <p>loading...</p>
+              </div>
+            );
       case false:
         switch (this.state.step) {
           case 1:
@@ -102,10 +108,17 @@ class SignUp extends React.Component {
                 phoneNumber={this.state.NewUserInfo.phoneNumber}
               />
             );
+            default:
+              return (
+                <div>
+                  <p>Invalid request</p>
+                </div>
+              );
+            
+          }
         }
     }
   }
-}
 
 const mapStateToProps = state => {
   return {

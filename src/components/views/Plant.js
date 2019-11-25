@@ -20,11 +20,11 @@ class Plant extends React.Component {
   };
   componentDidMount = () => {
     const id = this.props.match.params.id;
-    console.log(id);
+    // console.log(id);
     this.props
       .getPlant(id)
       .then(res => {
-        console.log(res);
+        // console.log(res);
         this.setState({
           plant: res.payload.data[0]
         });
@@ -50,7 +50,7 @@ class Plant extends React.Component {
 
   handleDelete = (e, id) => {
     e.preventDefault();
-    console.log("id", id);
+    // console.log("id", id);
     this.props.deletePlant(id).then(() => {
       const userId = localStorage.getItem("userId");
       this.props.getPlantList(userId).then(() => {
@@ -80,7 +80,7 @@ class Plant extends React.Component {
                 <p>description: {this.state.plant.description}</p>
               </div>
               <div className='image-content'>
-              <img className='plant-image z-depth-2' src={this.state.plant.plantURL} />
+              <img className='plant-image z-depth-2' src={this.state.plant.plantURL} alt={this.state.plant.alt}/>
               </div>
               </div>
               <div className='notif-box z-depth-2'>
@@ -88,7 +88,7 @@ class Plant extends React.Component {
                 <ul className='notif-list'> 
                   {this.state.notifications.map(notification => {
                     return (
-                      <li className='notif-list-item'>Notification {moment(notification.notificationTime).fromNow()}</li>
+                      <li className='notif-list-item' key={notification.id} >Notification {moment(notification.notificationTime).fromNow()}</li>
                     );
                   })}
                 </ul>
