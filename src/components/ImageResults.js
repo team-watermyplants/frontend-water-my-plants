@@ -26,8 +26,14 @@ ImageResults.propTypes = {
 const ImageCard = styled.img`
     cursor: pointer;
     border-radius: 50%;
+    padding: .5em;
     width: 100px;
     height: 100px;
+
+    @media screen and (max-width: 420px) {
+        width: 70px;
+        height: 70px;
+    }
 `;
 
 

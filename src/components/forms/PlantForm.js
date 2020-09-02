@@ -238,11 +238,11 @@ class PlantForm extends React.Component {
               />
             </div>
 
-            <div className="image-select-container">
-              <div className="imgSelectTitle">
-                {this.state.images.length > 0 ? <h2>Select Image</h2> : null}
+            <ImgSelectContainer className="image-select-container">
+              <div>
+                {this.state.images.length > 0 ? <H2>select image</H2> : null}
               </div>
-              <div className="image-display">
+              <ImageDisplay>
                 {this.state.images.length > 0 ? (
                   <ImageResults
                     className="image-card"
@@ -250,15 +250,15 @@ class PlantForm extends React.Component {
                     selectImage={this.selectImage}
                   />
                 ) : null}
-              </div>
-            </div>
+              </ImageDisplay>
+            </ImgSelectContainer>
 
-            <button
+            <AddBtn
               className="btn waves-effect btn-large teal darken-2"
               onClick={this.handleSubmit}
             >
               {this.props.activePlant ? 'update plant' : 'add plant'}
-            </button>
+            </AddBtn>
 
             {this.props.activePlant ? (
               <button
@@ -290,16 +290,19 @@ export default connect(
 //Styled Components
 
 const Wrapper = styled.div`
-  max-width: 600px;
-  margin: 0 auto;
+  // max-width: 600px;
+  // margin: 0 auto;
+  // max-height: 50%;
 `;
 
 const Container = styled.div`
   max-width: 100%;
+  height: 600px;
   padding: 10px;
 
   @media screen and (max-width: 420px) {
     display: flex;
+    flex-contain: 1;
     flex-direction: column;
   }
 `;
@@ -307,10 +310,9 @@ const Container = styled.div`
 const WaterSchedule = styled.div`
   display: flex;
   justify-content: space-between;
-  flex: 1;
 
   @media screen and (max-width: 420px) {
-    flex-direction: column;
+    // flex-direction: column;
   }
 `;
 
@@ -322,8 +324,39 @@ const WaterDateTime = styled.div`
   padding: 5px;
 `;
 
+const ImgSelectContainer = styled.div`
+
+`;
+
+const ImageDisplay = styled.div`
+  display: flex;
+
+  @media screen and (max-width: 420px) {
+
+  }
+`;
+
+const AddBtn = styled.button`
+
+  @media screen and (max-width: 420px) {
+    left: 50%;
+    transform: translateX(-50%);
+    margin-top: 1em;
+  }
+`;
+
 const H1 = styled.h1`
   color: #00796b;
+  font-size: 3rem;
+
+  @media screen and (max-width: 420px) {
+    margin: 1rem 0 .6rem 0;
+  }
+`;
+
+const H2 = styled.h1`
+  color: #00796b;
+  font-size: 2rem;
 
   @media screen and (max-width: 420px) {
     margin: 1.2rem 0 .8rem 0;
