@@ -11,7 +11,7 @@ import { addPlant, updatePlant, cancelUpdate } from '../../actions';
 
 import 'materialize-css/dist/css/materialize.min.css';
 import 'react-datepicker/dist/react-datepicker.css';
-import './PlantForm.css';
+// import './PlantForm.css';
 
 const options = [
   { value: 1, label: 'every day' },
