@@ -324,4 +324,8 @@ const WaterDateTime = styled.div`
 
 const H1 = styled.h1`
   color: #00796b;
+
+  @media screen and (max-width: 420px) {
+    margin: 1.2rem 0 .8rem 0;
+  }
 `;
