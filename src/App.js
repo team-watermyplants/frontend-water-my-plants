@@ -36,6 +36,8 @@ class App extends Component {
                 height: '75px',
                 background: '#00796B',
                 position: 'sticky',
+                width: '100%',
+
               }}
             >
               <Link to="/" style={{ display: 'flex', alignItems: 'center' }}>
