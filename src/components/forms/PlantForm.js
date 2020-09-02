@@ -295,14 +295,23 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100%;
+  max-width: 100%;
   padding: 10px;
+
+  @media screen and (max-width: 420px) {
+    display: flex;
+    flex-direction: column;
+  }
 `;
 
 const WaterSchedule = styled.div`
   display: flex;
   justify-content: space-between;
-  flex-basis: auto;
+  flex: 1;
+
+  @media screen and (max-width: 420px) {
+    flex-direction: column;
+  }
 `;
 
 const WaterDateTime = styled.div`
